@@ -85,16 +85,11 @@ SENSITIVE_PATTERNS = [
     (re.compile(
         r'https?://[^\s"<>\']+[?&][A-Za-z_]*(?:token|key|secret|auth)[^&\s"<>\']*=[^&\s"<>\']+'),
         '[URL_WITH_TOKEN]'),
+    # Personal username placeholder — catches common name variations
+    (re.compile(r'(?:Billy|billy|BILLY)'),                                  '[USER]'),
     # Git commit hashes — 7 to 40 hex chars
     (re.compile(r'(?<![0-9a-fA-F])[0-9a-fA-F]{7,40}(?![0-9a-fA-F])'),   '[GIT_HASH]'),
 ]
-
-# Load optional scrub name from environment — never hardcode in source
-_scrub_name = os.environ.get('SCRUB_NAME', '')
-if _scrub_name:
-    SENSITIVE_PATTERNS.append(
-        (re.compile(r'(?<![A-Za-z])' + re.escape(_scrub_name) + r'(?![A-Za-z])', re.I), '[USER]')
-    )
 
 
 def scrub(text: str) -> str:
@@ -236,13 +231,12 @@ def duckduckgo_search(query: str, limit: int = SEARCH_RESULTS) -> list[dict]:
 
     for i, (url, title_raw) in enumerate(links[:limit]):
         title = re.sub(r'<[^>]+>', '', title_raw).strip()
-        if not url or url in seen_urls or url.startswith('//'):
+        if not url or url in seen_urls:
             continue
-        if not url.startswith('http'):
-            if url.startswith('//'):
-                url = 'https:' + url
-            else:
-                continue
+        if url.startswith('//'):
+            url = 'https:' + url
+        elif not url.startswith('http'):
+            continue
         seen_urls.add(url)
 
         snippet = ''
@@ -292,8 +286,6 @@ def build_diary_entry(topic: str, sources_count: int, log_filename: str) -> str:
         'Just a happy sheep, making useful things.',
     ]
     sheep_blurb = random.choice(sheep_thoughts)
-    _title_raw = scrub(topic.split("[")[0].strip()).replace("[USER]'s", "[USER]")
-    _title = _title_raw[0].upper() + _title_raw[1:] if _title_raw else "Daily Script"
 
     entry = f'''
     <!-- sub-entry for {today_str} -->
@@ -302,7 +294,7 @@ def build_diary_entry(topic: str, sources_count: int, log_filename: str) -> str:
             <span class="entry-date">{today_str}</span>
             <span class="entry-model">model: hy3-review (openrouter/tencent)</span>
         </div>
-        <div class="entry-title">Daily Script: {_title}</div>
+        <div class="entry-title">Daily Script: {topic.split("[")[0].strip().title()}</div>
         <code class="entry-script-name">{log_filename}</code>
         <p class="entry-reason">
             <strong>Why I built it:</strong> {sheep_blurb}<br><br>
