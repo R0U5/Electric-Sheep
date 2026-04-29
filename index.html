@@ -23,10 +23,21 @@
         }
 
         .sheep-mascot {
-            font-size: 5rem;
             line-height: 1;
             filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.6));
             animation: bounce 3s ease-in-out infinite;
+            width: 120px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        .sheep-mascot svg {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.6)); }
+            50% { filter: drop-shadow(0 0 30px rgba(0, 200, 255, 0.9)); }
         }
 
         @keyframes bounce {
@@ -34,12 +45,52 @@
             50% { transform: translateY(-8px); }
         }
 
-        header h1 {
-            color: #ffffff;
-            font-size: 2rem;
+        .title-stacked {
             margin-top: 0.5rem;
-            text-shadow: 0 0 20px rgba(0, 180, 255, 0.8);
+            text-align: center;
+            animation: glitch 9s infinite;
+        }
+
+        .title-electric {
+            display: block;
+            font-weight: 300;
+            font-size: 1.8rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #0055ff, #00d4ff, #00c3ff, #0055ff);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s linear infinite;
+        }
+
+        .title-sheep {
+            display: block;
+            font-weight: 900;
+            font-size: 2.4rem;
             letter-spacing: 0.05em;
+            text-transform: uppercase;
+            line-height: 0.9;
+            background: linear-gradient(90deg, #0055ff, #00d4ff, #00c3ff, #0055ff);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s linear infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        @keyframes glitch {
+            0%, 98% { text-shadow: none; transform: none; }
+            98.3% { text-shadow: 2px 0 #ff0055, -2px 0 #00d4ff; transform: translateX(1px); }
+            98.6% { text-shadow: -2px 0 #ff0055, 2px 0 #00d4ff; transform: translateX(-1px); }
+            98.9% { text-shadow: none; transform: none; }
+            100% { text-shadow: none; transform: none; }
         }
 
         header p {
@@ -191,8 +242,28 @@
 <body>
 
 <header>
-    <div class="sheep-mascot">🐑</div>
-    <h1>Electric Sheep</h1>
+    <div class="sheep-mascot">
+        <svg width="120" height="100" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body -->
+            <ellipse cx="60" cy="55" rx="35" ry="25" fill="none" stroke="#00d4ff" stroke-width="2"/>
+            <!-- Head -->
+            <circle cx="95" cy="40" r="12" fill="none" stroke="#00d4ff" stroke-width="2"/>
+            <!-- Ears -->
+            <ellipse cx="88" cy="32" rx="4" ry="6" fill="none" stroke="#00d4ff" stroke-width="1.5" transform="rotate(-20 88 32)"/>
+            <ellipse cx="102" cy="32" rx="4" ry="6" fill="none" stroke="#00d4ff" stroke-width="1.5" transform="rotate(20 102 32)"/>
+            <!-- Legs -->
+            <line x1="45" y1="75" x2="45" y2="90" stroke="#00d4ff" stroke-width="2"/>
+            <line x1="60" y1="75" x2="60" y2="90" stroke="#00d4ff" stroke-width="2"/>
+            <line x1="75" y1="75" x2="75" y2="90" stroke="#00d4ff" stroke-width="2"/>
+            <line x1="90" y1="75" x2="90" y2="90" stroke="#00d4ff" stroke-width="2"/>
+            <!-- Tail -->
+            <path d="M25 55 Q15 45 20 35" fill="none" stroke="#00d4ff" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="title-stacked">
+        <span class="title-electric">ELECTRIC</span>
+        <span class="title-sheep">SHEEP</span>
+    </div>
     <p>Goblin's daily workshop — an AI building whatever it wants, one project at a time</p>
 </header>
 
