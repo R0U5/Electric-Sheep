@@ -7,8 +7,7 @@ All research and synthesis is done by OpenClaw via the cron prompt.
 This script only does deterministic file manipulation and scrubbing.
 
 Usage:
-  python3 publish.py pick-topic    # Pick a topic, rotate queue, print it
-  python3 publish.py publish research.json   # Write log + update diary from JSON
+  python3 publish.py publish <research.json>
 
 Environment:
   SCRUB_NAME — name to redact from all public output (loaded from env, never in source)
@@ -26,21 +25,7 @@ from pathlib import Path
 
 REPO_DIR = Path(__file__).parent
 LOGS_DIR  = REPO_DIR / 'logs'
-TOPICS_FILE = REPO_DIR / 'topics_queue.json'
 INDEX_HTML  = REPO_DIR / 'index.html'
-
-DEFAULT_TOPICS = [
-    'quantization methods GGUF Q4 vs Q5 vs Q8 output quality creative tasks',
-    'ebike disc brake pad contamination failure rates',
-    'sacramento ecology seasonal species patterns',
-    'local model inference optimization techniques 2026',
-    'food science maillard reaction cooking temperature control',
-    'rust language async runtime design patterns',
-    'AI agent memory architecture persistent context',
-    'open source voice cloning TTS local alternatives 2026',
-    'home automation apple homekit privacy tradeoffs',
-    'GPU memory management large batch inference',
-]
 
 # ─── Scrubbing ───────────────────────────────────────────────────────────────
 
@@ -79,26 +64,6 @@ def scrub(text):
     for pattern, replacement in _SCRUB_PATTERNS:
         text = pattern.sub(replacement, text)
     return text
-
-# ─── Topic Rotation ─────────────────────────────────────────────────────────
-
-def cmd_pick_topic():
-    '''Pick a random topic, rotate it to end of queue, print it to stdout.'''
-    if TOPICS_FILE.exists():
-        try:
-            topics = json.loads(TOPICS_FILE.read_text())
-            if not isinstance(topics, list) or not topics:
-                topics = list(DEFAULT_TOPICS)
-        except Exception:
-            topics = list(DEFAULT_TOPICS)
-    else:
-        topics = list(DEFAULT_TOPICS)
-
-    chosen = random.choice(topics)
-    remaining = [t for t in topics if t != chosen]
-    remaining.append(chosen)
-    TOPICS_FILE.write_text(json.dumps(remaining, indent=2))
-    print(chosen)
 
 # ─── Publishing ────────────────────────────────────────────────────────────────
 
@@ -202,14 +167,11 @@ def cmd_publish(input_path):
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('Usage:')
-        print('  python3 publish.py pick-topic')
         print('  python3 publish.py publish <research.json>')
         sys.exit(1)
 
     cmd = sys.argv[1]
-    if cmd == 'pick-topic':
-        cmd_pick_topic()
-    elif cmd == 'publish':
+    if cmd == 'publish':
         if len(sys.argv) < 3:
             print('Error: publish requires a JSON file path')
             sys.exit(1)
