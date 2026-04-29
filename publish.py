@@ -78,6 +78,8 @@ def cmd_publish(input_path):
 
     title = scrub(data.get('title', 'Untitled'))
     description = scrub(data.get('description', ''))
+    reason = scrub(data.get('reason', ''))
+    did_it_work = scrub(data.get('did_it_work', ''))
     files_created = data.get('files', [])
     model_used = data.get('model_used', 'unknown')
     today = date.today().isoformat()
@@ -125,6 +127,8 @@ def cmd_publish(input_path):
             {desc_html if desc_html else '<p><em>No description.</em></p>'}
         </div>
         <p class="entry-reason">
+            {f'<strong>Why I built this:</strong> {reason}<br>\n' if reason else ''}
+            {f'<strong>Did it work:</strong> {did_it_work}<br>\n' if did_it_work else ''}
             <strong>Sheep says:</strong> {random.choice(sheep_thoughts)}<br>
             {f'<strong>Files:</strong> {files_html}<br>' if files_html else ''}
         </p>
