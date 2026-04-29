@@ -1,0 +1,39 @@
+{
+  "date": "2026-04-28",
+  "topic": "CRISPR Gene Drives for Invasive Species Control",
+  "summary": "CRISPR-based gene drives can spread engineered traits through wild populations by copying themselves onto both chromosomes during reproduction — a mechanism that bypasses normal Mendelian inheritance and could theoretically reach fixation in a population within a few seasons. For invasive species control, researchers are pursuing two main strategies: suppression drives that reduce population size (tested in mosquitoes, modeled for Nile tilapia and grey squirrels), and replacement drives that swap harmful traits for harmless ones. A key 2025 advance was the HD-ClvR system from the University of Edinburgh, which layers three mechanisms — a homing drive, a cleave-and-rescue toxin-antidote, and a daisyfield self-limiting element — to simultaneously defeat evolutionary resistance and confine spread geographically. Work is furthest along for mosquito-borne disease (malaria vectors in Tanzania, dengue vectors for Aedes aegypti), where contained field trials are described as urgent and necessary. For invasive vertebrates, modeling is more mature than empirical work — the Australian case study (feral cats, foxes, rabbits, mice, rats, starlings) identifies critical data gaps in each species' population biology before field deployment would be responsible. The field's central tension: the same properties that make drives effective (irreversibility, cross-border spread) are precisely what make governance hard. No self-propagating CRISPR gene drive has been released into the wild as of early 2026.",
+  "sources_count": 6,
+  "sources": [
+    {
+      "title": "Looking back at 2025: Gene drive research highlights",
+      "url": "https://genedrivenetwork.org/blog/looking-back-at-2025-gene-drive-research-highlights/",
+      "snippet": "Comprehensive 2025 review covering Transmission Zero's GM mosquitoes blocking local malaria parasites in Tanzania, self-limiting drive advances from LSTM/Imperial/Target Malaria, VectorGrid-Africa monitoring network launch, and the push toward contained field trials."
+    },
+    {
+      "title": "Novel combination of CRISPR-based gene drives eliminates resistance and localises spread",
+      "url": "https://www.geneconvenevi.org/articles/novel-combination-of-crispr-based-gene-drives-eliminates-resistance-and-localises-spread/",
+      "snippet": "Describes HD-ClvR — a triple-stacked gene drive system combining homing, cleave-and-rescue, and daisyfield elements — modeled on invasive grey squirrels in the UK; achieves population control with geographically confined spread."
+    },
+    {
+      "title": "Gene Drive Technologies for the Control of Invasive Species",
+      "url": "https://rootspress.org/journals/pbiotech/article/view/1310",
+      "snippet": "2025 review applying an ecological risk framework to seven Australian invasive species (house mouse, red fox, feral cat, rabbit, black rat, European starling) and identifying critical knowledge gaps that must be filled before gene drive deployment."
+    },
+    {
+      "title": "CRISPR Gene Drives: How We Might Reprogram Wild Species to Fight Disease",
+      "url": "https://www.currenttrends.news/2026/03/crispr-gene-drives-how-we-might.html",
+      "snippet": "2026 overview noting no wild CRISPR gene drive release has occurred, with the research community broadly agreeing more data, modeling, and policy work are needed before open-environment deployment."
+    },
+    {
+      "title": "CRISPR-Cas9 suppression gene drives for Nile tilapia control",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/26895293.2026.2639259",
+      "snippet": "Theoretical modeling of CRISPR suppression drives targeting invasive Nile tilapia, framed within a precautionary framework to protect critically endangered native tilapia species."
+    },
+    {
+      "title": "Core commitments for field trials of gene drive organisms",
+      "url": "https://www.science.org/doi/10.1126/science.abd1908",
+      "snippet": "Science magazine's framework outlining what must be in place before any gene drive field trial: community engagement, monitoring protocols, and epidemiological or ecological impact assessment plans."
+    }
+  ],
+  "model_used": "openrouter/minimax/minimax-m2.7"
+}
