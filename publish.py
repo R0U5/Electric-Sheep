@@ -2,12 +2,12 @@
 '''
 publish.py — File operations helper for Electric Sheep.
 
-Handles topic rotation, research log writing, and HTML diary updates.
-All research and synthesis is done by OpenClaw via the cron prompt.
-This script only does deterministic file manipulation and scrubbing.
+Handles log writing, HTML diary updates, and sensitive data scrubbing.
+All creative work is done by Goblin via the cron prompt.
+This script only does deterministic file manipulation.
 
 Usage:
-  python3 publish.py publish <research.json>
+  python3 publish.py publish entry.json
 
 Environment:
   SCRUB_NAME — name to redact from all public output (loaded from env, never in source)
@@ -24,8 +24,8 @@ from pathlib import Path
 # ─── Paths ───────────────────────────────────────────────────────────────────
 
 REPO_DIR = Path(__file__).parent
-LOGS_DIR  = REPO_DIR / 'logs'
-INDEX_HTML  = REPO_DIR / 'index.html'
+LOGS_DIR = REPO_DIR / 'logs'
+INDEX_HTML = REPO_DIR / 'index.html'
 
 # ─── Scrubbing ───────────────────────────────────────────────────────────────
 
@@ -58,45 +58,38 @@ def _build_scrub_patterns():
 
 _SCRUB_PATTERNS = _build_scrub_patterns()
 
-
 def scrub(text):
     '''Remove sensitive info from text before writing to public files.'''
     for pattern, replacement in _SCRUB_PATTERNS:
         text = pattern.sub(replacement, text)
     return text
 
-# ─── Publishing ────────────────────────────────────────────────────────────────
+# ─── Helpers ─────────────────────────────────────────────────────────────────
 
 def _slugify(text):
     slug = re.sub(r'[^a-z0-9]+', '_', text.lower())
     return slug.strip('_')[:60]
 
+# ─── Publishing ──────────────────────────────────────────────────────────────
 
 def cmd_publish(input_path):
-    '''Read research JSON, write log file, append diary entry to index.html.'''
+    '''Read project JSON, write log file, append diary entry to index.html.'''
     data = json.loads(Path(input_path).read_text())
 
-    topic    = data['topic']
-    summary  = scrub(data.get('summary', ''))
-    sources  = data.get('sources', [])
+    title = scrub(data.get('title', 'Untitled'))
+    description = scrub(data.get('description', ''))
+    files_created = data.get('files', [])
     model_used = data.get('model_used', 'unknown')
-    today    = date.today().isoformat()
-
-    # Scrub all source fields
-    for s in sources:
-        for key in ('title', 'url', 'snippet'):
-            if key in s and s[key]:
-                s[key] = scrub(str(s[key]))
+    today = date.today().isoformat()
 
     # ── Write JSON log ──
     LOGS_DIR.mkdir(exist_ok=True)
-    filename = f'{today}_{_slugify(topic)}.json'
+    filename = f'{today}_{_slugify(title)}.json'
     log_entry = {
         'date': today,
-        'topic': topic,
-        'summary': summary,
-        'sources_count': len(sources),
-        'sources': sources,
+        'title': title,
+        'description': description,
+        'files': files_created,
         'model_used': model_used,
     }
     (LOGS_DIR / filename).write_text(json.dumps(log_entry, indent=2, ensure_ascii=False))
@@ -111,10 +104,14 @@ def cmd_publish(input_path):
         'Just a happy sheep, making useful things.',
     ]
 
-    summary_html = ''
-    if summary and not summary.startswith('['):
-        paragraphs = [p.strip() for p in summary.split('\n') if p.strip()]
-        summary_html = '\n        '.join(f'<p>{scrub(p)}</p>' for p in paragraphs)
+    desc_html = ''
+    if description:
+        paragraphs = [p.strip() for p in description.split('\n') if p.strip()]
+        desc_html = '\n '.join(f'<p>{scrub(p)}</p>' for p in paragraphs)
+
+    files_html = ''
+    if files_created:
+        files_html = ', '.join(f'<code>{scrub(str(f))}</code>' for f in files_created)
 
     entry_html = f'''
     <!-- sub-entry for {today} -->
@@ -123,15 +120,13 @@ def cmd_publish(input_path):
             <span class="entry-date">{today}</span>
             <span class="entry-model">model: {scrub(model_used)}</span>
         </div>
-        <div class="entry-title">{scrub(topic).title()}</div>
-        <code class="entry-script-name">{filename}</code>
+        <div class="entry-title">{title}</div>
         <div class="entry-summary">
-            <strong>Research synthesis:</strong>
-            {summary_html if summary_html else '<p><em>No summary available.</em></p>'}
+            {desc_html if desc_html else '<p><em>No description.</em></p>'}
         </div>
         <p class="entry-reason">
             <strong>Sheep says:</strong> {random.choice(sheep_thoughts)}<br>
-            <strong>Sources reviewed:</strong> {len(sources)}<br>
+            {f'<strong>Files:</strong> {files_html}<br>' if files_html else ''}
         </p>
     </div>'''
 
@@ -145,12 +140,10 @@ def cmd_publish(input_path):
     section_end = f'<!-- === DAY-{today}-END === -->'
 
     if section_start in html:
-        # Today already has a section — append inside it
         insert_at = html.find(section_end)
         if insert_at != -1:
             html = html[:insert_at] + '\n' + entry_html + '\n' + html[insert_at:]
     else:
-        # New day — insert after intro, before older days
         full_section = section_start + '\n' + entry_html + '\n' + section_end + '\n\n'
         intro_end = html.find('</p>', html.find('class="intro"'))
         if intro_end == -1:
@@ -166,8 +159,7 @@ def cmd_publish(input_path):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Usage:')
-        print('  python3 publish.py publish <research.json>')
+        print('Usage: python3 publish.py publish <project.json>')
         sys.exit(1)
 
     cmd = sys.argv[1]
