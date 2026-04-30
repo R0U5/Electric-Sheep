@@ -53,7 +53,7 @@
             margin-top: 0.5rem;
             text-align: center;
             position: relative;
-            animation: glitch 10s ease-in-out infinite;
+            animation: glitch 6s ease-in-out infinite;
         }
 
         .title-electric {
@@ -65,6 +65,20 @@
             color: rgba(255, 255, 255, 0.85);
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             margin-bottom: 0.1rem;
+            animation: elec-flicker 4s ease-in-out infinite;
+        }
+
+        @keyframes elec-flicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+            24% { opacity: 1; }
+            24.5% { opacity: 0.4; text-shadow: 0 0 2px rgba(255, 255, 255, 0.1); }
+            25% { opacity: 1; text-shadow: 0 0 30px rgba(180, 235, 255, 0.6); }
+            25.3% { opacity: 0.7; text-shadow: 0 0 8px rgba(255, 255, 255, 0.2); }
+            25.6% { opacity: 1; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+            67% { opacity: 1; }
+            67.3% { opacity: 0.5; text-shadow: 0 0 4px rgba(255, 255, 255, 0.1); }
+            67.6% { opacity: 1; text-shadow: 0 0 35px rgba(180, 235, 255, 0.7); }
+            68% { opacity: 1; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
         }
 
         .title-sheep {
@@ -88,7 +102,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer 5s linear infinite;
+            animation: shimmer 3.5s linear infinite;
             filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
         }
 
@@ -98,11 +112,23 @@
         }
 
         @keyframes glitch {
-            0%, 97%, 100% { transform: none; }
-            97.5% { transform: translateX(-2px) skewX(-0.5deg); }
-            98% { transform: translateX(2px) skewX(0.5deg); }
-            98.5% { transform: translateX(-1px); }
-            99% { transform: none; }
+            0%, 100% { transform: none; text-shadow: none; }
+            18% { transform: none; }
+            18.5% { transform: translateX(-3px) skewX(-1deg); text-shadow: -2px 0 #0ff, 2px 0 #fff; }
+            19% { transform: translateX(3px) skewX(1deg); text-shadow: 2px 0 #0ff, -2px 0 #b0eaff; }
+            19.5% { transform: translateX(-1px); text-shadow: -1px 0 #0ff; }
+            20% { transform: none; text-shadow: none; }
+            55% { transform: none; }
+            55.3% { transform: translateX(2px) skewX(-0.5deg); text-shadow: -2px 0 #0ff, 2px 0 #fff; }
+            55.8% { transform: translateX(-2px) skewX(0.5deg); text-shadow: 2px 0 #b0eaff; }
+            56.3% { transform: translateX(1px); }
+            56.5% { transform: none; text-shadow: none; }
+            82% { transform: none; }
+            82.2% { transform: translateX(-4px) skewX(-1.5deg); text-shadow: -3px 0 #0ff, 3px 0 #fff; }
+            82.5% { transform: translateX(4px) skewX(1.5deg); text-shadow: 3px 0 #0ff, -2px 0 #b0eaff; }
+            82.8% { transform: translateX(-2px) skewX(-0.5deg); text-shadow: -1px 0 #0ff; }
+            83% { transform: translateX(1px); text-shadow: 1px 0 #b0eaff; }
+            83.3% { transform: none; text-shadow: none; }
         }
 
         header p {
@@ -274,7 +300,8 @@
                 <!-- Ears -->
                 <ellipse cx="74" cy="26" rx="5" ry="8" fill="none" stroke="white" stroke-width="2" transform="rotate(-10, 74, 26)"/>
                 <ellipse cx="88" cy="28" rx="5" ry="7" fill="none" stroke="white" stroke-width="2" transform="rotate(10, 88, 28)"/>
-                <!-- Eye -->
+                <!-- Eyes -->
+                <circle cx="76" cy="41" r="2.5" fill="white"/>
                 <circle cx="84" cy="40" r="2.5" fill="white"/>
                 <!-- Legs -->
                 <line x1="36" y1="74" x2="36" y2="92" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
