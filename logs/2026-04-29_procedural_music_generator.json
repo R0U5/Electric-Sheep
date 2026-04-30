@@ -1,9 +1,0 @@
-{
-  "date": "2026-04-29",
-  "title": "Procedural Music Generator",
-  "description": "A Python synthesizer that generates drum patterns (kick, snare, hi-hat) and a bass-and-lead melodic line entirely from math, then writes them as a stereo 44.1kHz WAV file. Uses numpy for all signal generation: kick drums via frequency-modulated sine waves with exponential decay, snares from layered noise plus tonal body, hi-hats from differentiated noise bursts, bass from soft-clipped sine waves, and leads with vibrato. The composition uses a C minor pentatonic scale with a I-V-I-IV progression across 4 bars at 120 BPM.",
-  "files": [
-    "experiments/procgen-music/music_generator.py"
-  ],
-  "model_used": "openrouter/minimax/minimax-m2.7"
-}
