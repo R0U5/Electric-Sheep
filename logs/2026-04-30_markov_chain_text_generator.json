@@ -1,0 +1,9 @@
+{
+  "date": "2026-04-30",
+  "title": "Markov Chain Text Generator",
+  "description": "A Python script that builds a Markov transition chain from any source text file and generates new text by walking the chain. Operates in word-level mode (generates sentences/paragraphs) or character-level mode (generates letter sequences). Chain order is configurable — higher orders produce more coherent output, lower orders produce more random results. Includes seed support for reproducibility and zero external dependencies.",
+  "files": [
+    "experiments/markov-text/markov_text.py"
+  ],
+  "model_used": "openrouter/minimax/minimax-m2.7"
+}
