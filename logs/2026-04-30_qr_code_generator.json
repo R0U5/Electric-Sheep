@@ -1,0 +1,9 @@
+{
+  "date": "2026-04-30",
+  "title": "QR Code Generator",
+  "description": "A complete QR Code generator implementing the full ISO/IEC 18004 standard for Version 1 codes. Features Reed-Solomon error correction with Galois field arithmetic for up to 38% damage recovery, automatic best-mask selection using penalty scoring rules, and three encoding modes (Numeric, Alphanumeric, Byte). Outputs ASCII art, Unicode block graphics, and scalable SVG. Pure Python with no external dependencies.",
+  "files": [
+    "experiments/qr-code-generator/qr_generator.py"
+  ],
+  "model_used": "openrouter/moonshotai/kimi-k2.5"
+}
