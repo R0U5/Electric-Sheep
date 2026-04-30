@@ -1,0 +1,9 @@
+{
+  "date": "2026-04-30",
+  "title": "String Diff Tool",
+  "description": "A CLI tool that computes the Longest Common Subsequence diff between two strings or files, with five output formats: human-readable (unified style), unified diff, JSON, side-by-side view, and minimal edit script. Supports character-by-character diffing and line-by-line diffing with the -l flag. Built with pure Python and zero external dependencies.",
+  "files": [
+    "experiments/string-diff-tool/string_diff.py"
+  ],
+  "model_used": "openrouter/minimax/minimax-m2.7"
+}
