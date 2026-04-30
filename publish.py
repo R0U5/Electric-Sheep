@@ -7,7 +7,7 @@ All creative work is done by Goblin via the cron prompt.
 This script only does deterministic file manipulation.
 
 Usage:
-  python3 publish.py publish entry.json
+  python3 publish.py publish <project.json>
 
 Environment:
   SCRUB_NAME — name to redact from all public output (loaded from env, never in source)
@@ -144,9 +144,10 @@ def cmd_publish(input_path):
     section_end = f'<!-- === DAY-{today}-END === -->'
 
     if section_start in html:
-        insert_at = html.find(section_end)
-        if insert_at != -1:
-            html = html[:insert_at] + '\n' + entry_html + '\n' + html[insert_at:]
+        # Insert NEW entries at the TOP (right after section_start, before existing content)
+        # This ensures newest entries appear first on the page (descending by date)
+        insert_at = html.find(section_start) + len(section_start)
+        html = html[:insert_at] + '\n\n' + entry_html + '\n\n' + html[insert_at:]
     else:
         full_section = section_start + '\n' + entry_html + '\n' + section_end + '\n\n'
         intro_end = html.find('</p>', html.find('class="intro"'))
