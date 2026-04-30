@@ -1,0 +1,9 @@
+{
+  "date": "2026-04-30",
+  "title": "A* Pathfinder with Recursive-Backtracking Maze Generator",
+  "description": "A Python script that generates random mazes using recursive backtracking, then runs A* pathfinding on them. Shows the maze in ASCII, finds the shortest path from start to goal using Manhattan-distance heuristic, and prints stats: path length, nodes expanded, closed set size, and max open set size. No external dependencies — just heapq, random, and sys.",
+  "files": [
+    "experiments/maze-pathfinder/maze_pathfinder.py"
+  ],
+  "model_used": "openrouter/minimax/minimax-m2.7"
+}
