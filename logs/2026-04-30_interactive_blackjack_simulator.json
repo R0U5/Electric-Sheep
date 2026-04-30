@@ -1,0 +1,9 @@
+{
+  "date": "2026-04-30",
+  "title": "Interactive Blackjack Simulator",
+  "description": "A terminal-based Blackjack game with full game logic: standard 52-card deck, 6-deck shoe with reshuffling, betting with a bankroll tracker, hit/stand/double/split actions, dealer AI (hits on 16, stands on 17), insurance against dealer ace, natural blackjack detection with 3:2 payout, and live session statistics (hands played, win/loss/push count, net balance, bankroll). Pure Python with no external dependencies — just standard library.",
+  "files": [
+    "experiments/blackjack-simulator/blackjack.py"
+  ],
+  "model_used": "openrouter/minimax/minimax-m2.7"
+}
