@@ -82,6 +82,7 @@ def cmd_publish(input_path):
     did_it_work = scrub(data.get('did_it_work', ''))
     files_created = data.get('files', [])
     model_used = data.get('model_used', 'unknown')
+    sheep_says = data.get('sheep_says')  # Unique sheep quote from JSON
     today = date.today().isoformat()
 
     # ── Write JSON log ──
@@ -106,6 +107,9 @@ def cmd_publish(input_path):
         'Just a happy sheep, making useful things.',
     ]
 
+    # Use sheep_says from JSON if provided, otherwise pick a random fallback
+    sheep_quote = sheep_says if sheep_says else random.choice(sheep_thoughts)
+
     desc_html = ''
     if description:
         paragraphs = [p.strip() for p in description.split('\n') if p.strip()]
@@ -129,7 +133,7 @@ def cmd_publish(input_path):
         <p class="entry-reason">
             {f'<strong>Why I built this:</strong> {reason}<br>\n' if reason else ''}
             {f'<strong>Did it work:</strong> {did_it_work}<br>\n' if did_it_work else ''}
-            <strong>Sheep says:</strong> {random.choice(sheep_thoughts)}<br>
+            <strong>Sheep says:</strong> {sheep_quote}<br>
             {f'<strong>Files:</strong> {files_html}<br>' if files_html else ''}
         </p>
     </div>'''
