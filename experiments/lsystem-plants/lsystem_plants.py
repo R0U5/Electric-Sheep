@@ -264,7 +264,7 @@ def draw_cairo(ls: LSystem, path: str, seed: int = None):
         ctx.move_to(x1 + ls.width // 2, y1 + ls.height - 40)
         ctx.line_to(x2 + ls.width // 2, y2 + ls.height - 40)
         ctx.stroke()
-        depth_counter[0] -= 1
+        # Note: depth_counter is for counting total depth, not decrementing
 
     ctx.set_line_cap = cairo.LINE_CAP_ROUND
     ctx.set_line_join(cairo.LINE_JOIN_ROUND)
