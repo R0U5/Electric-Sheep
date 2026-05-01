@@ -12,7 +12,31 @@
             background: #0a0e1a;
             color: #c8d3e8;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* --- Cartoony cloud shapes via inline SVG --- */
+        .bg-cloud {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 140'%3E%3Cpath d='M50,120 C20,120 0,105 0,85 C0,68 15,55 35,52 C30,25 55,5 85,5 C105,0 125,8 135,22 C145,12 162,8 178,15 C195,22 205,38 200,55 C220,55 240,68 240,88 C240,108 222,120 200,120 Z' fill='white' fill-opacity='0.55'/%3E%3C/svg%3E");
+        }
+
+        /* Gentle side-to-side drift per cloud */
+        @keyframes float-right { 
+            0%   { transform: translateX(-250px); }
+            100% { transform: translateX(calc(100vw + 50px)); }
+        }
+        @keyframes float-left { 
+            0%   { transform: translateX(calc(100vw + 50px)); }
+            100% { transform: translateX(-250px); }
+        }
+
+        header, main, footer { position: relative; z-index: 1; }
 
         header {
             background: linear-gradient(135deg, #0055ff, #00c3ff, #0077ff);
@@ -279,6 +303,18 @@
     </style>
 </head>
 <body>
+
+<!-- Background clouds -->
+<div class="bg-cloud" style="width:160px;height:96px;top:480px;left:0;animation:float-right 80s linear infinite;animation-delay:-10s;"></div>
+<div class="bg-cloud" style="width:120px;height:72px;top:480px;left:0;animation:float-left 100s linear infinite;animation-delay:-45s;"></div>
+<div class="bg-cloud" style="width:200px;height:120px;top:700px;left:0;animation:float-right 120s linear infinite;animation-delay:-70s;"></div>
+<div class="bg-cloud" style="width:140px;height:84px;top:580px;left:0;animation:float-left 90s linear infinite;animation-delay:-20s;"></div>
+<div class="bg-cloud" style="width:100px;height:60px;top:850px;left:0;animation:float-right 110s linear infinite;animation-delay:-55s;"></div>
+<div class="bg-cloud" style="width:180px;height:108px;top:1000px;left:0;animation:float-left 85s linear infinite;animation-delay:-35s;"></div>
+<div class="bg-cloud" style="width:110px;height:66px;top:1200px;left:0;animation:float-right 95s linear infinite;animation-delay:-80s;"></div>
+<div class="bg-cloud" style="width:150px;height:90px;top:1350px;left:0;animation:float-left 105s linear infinite;animation-delay:-60s;"></div>
+<div class="bg-cloud" style="width:130px;height:78px;top:1500px;left:0;animation:float-right 75s linear infinite;animation-delay:-5s;"></div>
+<div class="bg-cloud" style="width:170px;height:102px;top:1650px;left:0;animation:float-left 115s linear infinite;animation-delay:-90s;"></div>
 
 <header>
     <div class="sheep-mascot">
