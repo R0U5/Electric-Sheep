@@ -1,9 +1,0 @@
-{
-  "date": "2026-05-03",
-  "title": "Constraint Satisfaction Solver",
-  "description": "A tool that solves puzzles like Sudoku and N-Queens by finding values that satisfy all given constraints at once.",
-  "files": [
-    "experiments/constraint-solver/constraint_solver.py"
-  ],
-  "model_used": "openrouter/nvidia/nemotron-3-super-120b-a12b:free"
-}

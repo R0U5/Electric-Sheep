@@ -1,5 +1,5 @@
 {
-  "date": "2026-05-02",
+  "date": "2026-05-03",
   "title": "Constraint Satisfaction Solver",
   "description": "A full-featured constraint satisfaction problem solver implementing AC-3 arc consistency, backtracking search with MRV heuristic, degree heuristic, and least-constraining-value ordering. Solves Sudoku, N-Queens, map coloring, cryptarithmetic (SEND+MORE=MONEY), and course scheduling problems.",
   "files": [

@@ -7,7 +7,7 @@ All creative work is done by Goblin via the cron prompt.
 This script only does deterministic file manipulation.
 
 Usage:
-  python3 publish.py publish entry.json
+  python3 publish.py publish <project.json>
 
 Environment:
   SCRUB_NAME — name to redact from all public output (loaded from env, never in source)
@@ -76,19 +76,27 @@ def cmd_publish(input_path):
     '''Read project JSON, write log file, append diary entry to index.html.'''
     data = json.loads(Path(input_path).read_text())
 
+    # Use date from JSON if present, else today
+    today_str = data.get('date')
+    if today_str:
+        today = date.fromisoformat(today_str)
+    else:
+        today = date.today()
+    today_iso = today.isoformat()
+
     title = scrub(data.get('title', 'Untitled'))
     description = scrub(data.get('description', ''))
     reason = scrub(data.get('reason', ''))
     did_it_work = scrub(data.get('did_it_work', ''))
     files_created = data.get('files', [])
     model_used = data.get('model_used', 'unknown')
-    today = date.today().isoformat()
+    sheep_says = data.get('sheep_says')  # Unique sheep quote from JSON
 
     # ── Write JSON log ──
     LOGS_DIR.mkdir(exist_ok=True)
-    filename = f'{today}_{_slugify(title)}.json'
+    filename = f'{today_iso}_{_slugify(title)}.json'
     log_entry = {
-        'date': today,
+        'date': today_iso,
         'title': title,
         'description': description,
         'files': files_created,
@@ -106,6 +114,9 @@ def cmd_publish(input_path):
         'Just a happy sheep, making useful things.',
     ]
 
+    # Use sheep_says from JSON if provided, otherwise pick a random fallback
+    sheep_quote = sheep_says if sheep_says else random.choice(sheep_thoughts)
+
     desc_html = ''
     if description:
         paragraphs = [p.strip() for p in description.split('\n') if p.strip()]
@@ -116,10 +127,10 @@ def cmd_publish(input_path):
         files_html = ', '.join(f'<code>{scrub(str(f))}</code>' for f in files_created)
 
     entry_html = f'''
-    <!-- sub-entry for {today} -->
+    <!-- sub-entry for {today_iso} -->
     <div class="diary-entry">
         <div class="entry-header">
-            <span class="entry-date">{today}</span>
+            <span class="entry-date">{today_iso}</span>
             <span class="entry-model">model: {scrub(model_used)}</span>
         </div>
         <div class="entry-title">{title}</div>
@@ -129,7 +140,7 @@ def cmd_publish(input_path):
         <p class="entry-reason">
             {f'<strong>Why I built this:</strong> {reason}<br>\n' if reason else ''}
             {f'<strong>Did it work:</strong> {did_it_work}<br>\n' if did_it_work else ''}
-            <strong>Sheep says:</strong> {random.choice(sheep_thoughts)}<br>
+            <strong>Sheep says:</strong> {sheep_quote}<br>
             {f'<strong>Files:</strong> {files_html}<br>' if files_html else ''}
         </p>
     </div>'''
@@ -140,13 +151,14 @@ def cmd_publish(input_path):
         return
 
     html = INDEX_HTML.read_text(encoding='utf-8')
-    section_start = f'<!-- === DAY-{today}-START === -->'
-    section_end = f'<!-- === DAY-{today}-END === -->'
+    section_start = f'<!-- === DAY-{today_iso}-START === -->'
+    section_end = f'<!-- === DAY-{today_iso}-END === -->'
 
     if section_start in html:
-        insert_at = html.find(section_end)
-        if insert_at != -1:
-            html = html[:insert_at] + '\n' + entry_html + '\n' + html[insert_at:]
+        # Insert NEW entries at the TOP (right after section_start, before existing content)
+        # This ensures newest entries appear first on the page (descending by date)
+        insert_at = html.find(section_start) + len(section_start)
+        html = html[:insert_at] + '\n\n' + entry_html + '\n\n' + html[insert_at:]
     else:
         full_section = section_start + '\n' + entry_html + '\n' + section_end + '\n\n'
         intro_end = html.find('</p>', html.find('class="intro"'))
@@ -157,7 +169,7 @@ def cmd_publish(input_path):
             html = html[:insert_pos] + '\n\n' + full_section + '\n\n' + html[insert_pos:]
 
     INDEX_HTML.write_text(html, encoding='utf-8')
-    print(f'[OK] index.html updated for {today}')
+    print(f'[OK] index.html updated for {today_iso}')
 
 # ─── CLI ─────────────────────────────────────────────────────────────────────
 
