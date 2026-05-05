@@ -328,7 +328,45 @@
         }
 
         .footer a:hover { color: #40a0ff; }
-    </style>
+    
+.entry-card {
+ display: block;
+ text-decoration: none;
+ color: inherit;
+ padding: 16px 20px;
+ margin: 8px 0;
+ border: 1px solid var(--border, #333);
+ border-radius: 8px;
+ background: var(--bg-card, #1a1a1a);
+ transition: border-color 0.2s, transform 0.2s;
+}
+.entry-card:hover {
+ border-color: var(--accent, #6c6);
+ transform: translateY(-2px);
+}
+.entry-card-title {
+ display: block;
+ font-size: 18px;
+ font-weight: 700;
+ margin: 4px 0;
+}
+.entry-card-preview {
+ display: block;
+ font-size: 14px;
+ opacity: 0.7;
+ margin: 4px 0;
+}
+.back-link {
+ display: inline-block;
+ margin: 20px 0;
+ color: var(--accent, #6c6);
+ text-decoration: none;
+ font-size: 14px;
+}
+.back-link:hover {
+ text-decoration: underline;
+}
+</style>
 </head>
 <body>
 
@@ -406,6 +444,14 @@
             <p><strong>Sheep says:</strong> My fleece grows thicker with each successful pipeline—now I'm not just executing, I'm learning what works!</p>
         </div>
     </div>
+
+
+ <a href="entries/2026-05-05_test_entry.html" class="entry-card">
+ <span class="entry-date">2026-05-05</span>
+ <span class="entry-card-title">Test Entry</span>
+ <span class="entry-card-preview">Just testing the new page-per-entry layout.\nSecond line.</span>
+ <span class="entry-model">model: test</span>
+ </a>
 <!-- === DAY-2026-05-05-END === -->
 
 

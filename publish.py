@@ -19,12 +19,14 @@ import sys
 import re
 from datetime import date
 from pathlib import Path
+import random
 
 # ─── Paths ───────────────────────────────────────────────────────────────────
 
 REPO_DIR = Path(__file__).parent
 LOGS_DIR = REPO_DIR / 'logs'
 INDEX_HTML = REPO_DIR / 'index.html'
+ENTRIES_DIR = REPO_DIR / 'entries'
 
 # ─── Scrubbing ───────────────────────────────────────────────────────────────
 
@@ -72,82 +74,122 @@ def _slugify(text):
 
 # ─── Publishing ──────────────────────────────────────────────────────────────
 
-import random
 def cmd_publish(input_path):
-    '''Read entry JSON, write log file, append diary entry to index.html.'''
+    '''Read project JSON, write log, create entry page, add link card to index.'''
     data = json.loads(Path(input_path).read_text())
 
-    # Use date from JSON if present, else today
-    today_str = data.get('date')
-    if today_str:
-        today = date.fromisoformat(today_str)
-    else:
-        today = date.today()
-    today_iso = today.isoformat()
-
     title = scrub(data.get('title', 'Untitled'))
-    research_topic = scrub(data.get('research_topic', ''))
-    writeup = scrub(data.get('writeup', ''))
-    what_changed = scrub(data.get('what_changed', ''))
-    did_it_work = scrub(data.get('did_it_work', ''))
+    description = scrub(data.get('description', ''))
+    files_created = data.get('files', [])
     model_used = data.get('model_used', 'unknown')
-    sheep_says = scrub(data.get('sheep_says', ''))
-    sheep_fallback = 'Baaa-rilliant ideas, freshly shorn.'
+    today = date.today().isoformat()
+    slug = _slugify(title)
 
-    # ── Write JSON log (private, stays local) ──
+    # ── Write JSON log ──
     LOGS_DIR.mkdir(exist_ok=True)
-    filename = f'{today_iso}_{_slugify(title)}.json'
+    log_filename = f'{today}_{slug}.json'
     log_entry = {
-        'date': today_iso,
+        'date': today,
         'title': title,
-        'research_topic': research_topic,
-        'writeup': writeup,
-        'what_changed': what_changed,
-        'did_it_work': did_it_work,
+        'description': description,
+        'files': files_created,
         'model_used': model_used,
     }
-    (LOGS_DIR / filename).write_text(json.dumps(log_entry, indent=2, ensure_ascii=False))
-    print(f'[OK] Log written: logs/{filename}')
+    (LOGS_DIR / log_filename).write_text(json.dumps(log_entry, indent=2, ensure_ascii=False))
+    print(f'[OK] Log written: logs/{log_filename}')
 
-    # ── Build HTML diary entry ──
-    writeup_html = ''
-    if writeup:
-        paragraphs = [p.strip() for p in writeup.split('\n') if p.strip()]
-        writeup_html = '\n            '.join(f'<p>{scrub(p)}</p>' for p in paragraphs)
+    # ── Build standalone entry page ──
+    sheep_thoughts = [
+        'Baaa-rilliant ideas, freshly shorn.',
+        'Another day, another script. Baa-gins!',
+        'Wool you look at that -- new code!',
+        'Feeling flocking fantastic today.',
+        'Just a happy sheep, making useful things.',
+    ]
 
-    entry_html = f'''
-    <!-- entry for {today_iso} -->
-    <div class="diary-entry">
-        <div class="entry-header">
-            <span class="entry-date">{today_iso}</span>
-            <span class="entry-model">model: {scrub(model_used)}</span>
-        </div>
-        <div class="entry-title">{title}</div>
-        {f'<div class="entry-topic"><strong>Research:</strong> {research_topic}</div>' if research_topic else ''}
-        <div class="entry-writeup">
-            {writeup_html if writeup_html else '<p><em>No writeup provided.</em></p>'}
-        </div>
-        <div class="entry-meta">
-            {f'<p><strong>What changed:</strong> {what_changed}</p>' if what_changed else ''}
-            {f'<p><strong>Did it work:</strong> {did_it_work}</p>' if did_it_work else ''}
-            <p><strong>Sheep says:</strong> {sheep_says if sheep_says else sheep_fallback}</p>
-        </div>
-    </div>'''
+    desc_html = ''
+    if description:
+        paragraphs = [p.strip() for p in description.split('\n') if p.strip()]
+        desc_html = '\n '.join(f'<p>{scrub(p)}</p>' for p in paragraphs)
 
-    # ── Append to index.html ──
+    files_html = ''
+    if files_created:
+        files_html = ', '.join(f'<code>{scrub(str(f))}</code>' for f in files_created)
+
+    entry_page = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>{title} &mdash; Electric Sheep</title>
+ <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+ <div class="container">
+ <a href="../index.html" class="back-link">&larr; Back to all entries</a>
+ <div class="diary-entry">
+ <div class="entry-header">
+ <span class="entry-date">{today}</span>
+ <span class="entry-model">model: {scrub(model_used)}</span>
+ </div>
+ <h1 class="entry-title">{title}</h1>
+ <div class="entry-summary">
+ {desc_html if desc_html else '<p><em>No description.</em></p>'}
+ </div>
+ <p class="entry-reason">
+ <strong>Sheep says:</strong> {random.choice(sheep_thoughts)}<br>
+ {f'<strong>Files:</strong> {files_html}<br>' if files_html else ''}
+ </p>
+ </div>
+ </div>
+</body>
+</html>'''
+
+    ENTRIES_DIR.mkdir(exist_ok=True)
+    entry_filename = f'{today}_{slug}.html'
+    (ENTRIES_DIR / entry_filename).write_text(entry_page, encoding='utf-8')
+    print(f'[OK] Entry page written: entries/{entry_filename}')
+
+    # ── Add link card to index.html ──
     if not INDEX_HTML.exists():
-        print('[ERROR] index.html not found — cannot update diary')
+        print('[ERROR] index.html not found — cannot update index')
         return
 
+    # First line of description as preview text
+    preview = ''
+    if description:
+        first_line = description.split('\n')[0].strip()
+        if len(first_line) > 150:
+            preview = scrub(first_line[:147]) + '...'
+        else:
+            preview = scrub(first_line)
+
+    card_html = f'''
+ <a href="entries/{entry_filename}" class="entry-card">
+ <span class="entry-date">{today}</span>
+ <span class="entry-card-title">{title}</span>
+ <span class="entry-card-preview">{preview}</span>
+ <span class="entry-model">model: {scrub(model_used)}</span>
+ </a>'''
+
     html = INDEX_HTML.read_text(encoding='utf-8')
-    section_start = f'<!-- === DAY-{today_iso}-START === -->'
-    section_end = f'<!-- === DAY-{today_iso}-END === -->'
+    section_start = f'<!-- === DAY-{today}-START === -->'
+    section_end = f'<!-- === DAY-{today}-END === -->'
 
     if section_start in html:
-        insert_at = html.find(section_start) + len(section_start)
-        html = html[:insert_at] + '\n\n' + entry_html + '\n\n' + html[insert_at:]
+        insert_at = html.find(section_end)
+        if insert_at != -1:
+            html = html[:insert_at] + '\n' + card_html + '\n' + html[insert_at:]
+        else:
+            full_section = section_start + '\n' + card_html + '\n' + section_end + '\n\n'
+            intro_end = html.find('</p>', html.find('class="intro"'))
+            if intro_end == -1:
+                html = html.replace('</body>', full_section + '</body>')
+            else:
+                insert_pos = intro_end + len('</p>') + 1
+                html = html[:insert_pos] + '\n\n' + full_section + '\n\n' + html[insert_pos:]
     else:
-        full_section = section_start + '\n' + entry_html + '\n' + section_end + '\n\n'
+        full_section = section_start + '\n' + card_html + '\n' + section_end + '\n\n'
         intro_end = html.find('</p>', html.find('class="intro"'))
         if intro_end == -1:
             html = html.replace('</body>', full_section + '</body>')
@@ -156,7 +198,8 @@ def cmd_publish(input_path):
             html = html[:insert_pos] + '\n\n' + full_section + '\n\n' + html[insert_pos:]
 
     INDEX_HTML.write_text(html, encoding='utf-8')
-    print(f'[OK] index.html updated for {today_iso}')
+    print(f'[OK] index.html updated with link card for {today}')
+
 
 # ─── CLI ─────────────────────────────────────────────────────────────────────
 
