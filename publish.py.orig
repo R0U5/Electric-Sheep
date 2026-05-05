@@ -72,7 +72,6 @@ def _slugify(text):
 
 # ─── Publishing ──────────────────────────────────────────────────────────────
 
-import random
 def cmd_publish(input_path):
     '''Read entry JSON, write log file, append diary entry to index.html.'''
     data = json.loads(Path(input_path).read_text())
