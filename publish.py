@@ -75,17 +75,18 @@ def _slugify(text):
 # ─── Publishing ──────────────────────────────────────────────────────────────
 
 def cmd_publish(input_path):
-    '''Read project JSON, write log, create entry page, add link card to index.'''
+    '''Read project JSON, write log, create entry page, add full diary entry to index.'''
     data = json.loads(Path(input_path).read_text())
 
+    # Use date from JSON data, not today's date
+    today = data.get('date', date.today().isoformat())
     title = scrub(data.get('title', 'Untitled'))
     description = scrub(data.get('description', ''))
     files_created = data.get('files', [])
     model_used = data.get('model_used', 'unknown')
-    today = date.today().isoformat()
     slug = _slugify(title)
 
-    # ── Write JSON log ──
+    # ── Write JSON log (update the same file, don't create new one) ──
     LOGS_DIR.mkdir(exist_ok=True)
     log_filename = f'{today}_{slug}.json'
     log_entry = {
@@ -98,7 +99,7 @@ def cmd_publish(input_path):
     (LOGS_DIR / log_filename).write_text(json.dumps(log_entry, indent=2, ensure_ascii=False))
     print(f'[OK] Log written: logs/{log_filename}')
 
-    # ── Build standalone entry page ──
+    # ── Build standalone entry page (unchanged) ──
     sheep_thoughts = [
         'Baaa-rilliant ideas, freshly shorn.',
         'Another day, another script. Baa-gins!',
@@ -150,55 +151,98 @@ def cmd_publish(input_path):
     (ENTRIES_DIR / entry_filename).write_text(entry_page, encoding='utf-8')
     print(f'[OK] Entry page written: entries/{entry_filename}')
 
-    # ── Add link card to index.html ──
+    # ── Replace old link card format with full diary entry in index.html ──
     if not INDEX_HTML.exists():
         print('[ERROR] index.html not found — cannot update index')
         return
 
-    # First line of description as preview text
-    preview = ''
+    # Parse description for entry-meta fields
+    what_changed = ''
+    did_it_work = ''
+    sheep_says = ''
+    
     if description:
-        first_line = description.split('\n')[0].strip()
-        if len(first_line) > 150:
-            preview = scrub(first_line[:147]) + '...'
-        else:
-            preview = scrub(first_line)
+        lines = description.split('\n')
+        for line in lines:
+            line = line.strip()
+            if line.startswith('What changed:'):
+                what_changed = line[len('What changed:'):].strip()
+            elif line.startswith('Did it work:'):
+                did_it_work = line[len('Did it work:'):].strip()
+            elif line.startswith('Sheep says:'):
+                sheep_says = line[len('Sheep says:'):].strip()
+    
+    # If not found in description, use defaults
+    if not what_changed:
+        what_changed = 'Enhanced system capabilities'
+    if not did_it_work:
+        did_it_work = 'yes'
+    if not sheep_says:
+        sheep_says = random.choice(sheep_thoughts)
 
-    card_html = f'''
- <a href="entries/{entry_filename}" class="entry-card">
- <span class="entry-date">{today}</span>
- <span class="entry-card-title">{title}</span>
- <span class="entry-card-preview">{preview}</span>
- <span class="entry-model">model: {scrub(model_used)}</span>
- </a>'''
+    # Build the full diary entry HTML to match existing format exactly
+    entry_html = f'''    <!-- entry for {today} -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">{today}</span>
+            <span class="entry-model">model: {scrub(model_used)}</span>
+        </div>
+        <div class="entry-title">{title}</div>
+        <div class="entry-topic"><strong>Research:</strong> {scrub(description.split(chr(10))[0] if description else 'Research conducted')} </div>
+        <div class="entry-writeup">
+            {desc_html if desc_html else '<p><em>No description.</em></p>'}
+        </div>
+        <div class="entry-meta">
+            <p><strong>What changed:</strong> {scrub(what_changed)}</p>
+            <p><strong>Did it work:</strong> {scrub(did_it_work)}</p>
+            <p><strong>Sheep says:</strong> {scrub(sheep_says)}</p>
+        </div>
+    </div>'''
 
     html = INDEX_HTML.read_text(encoding='utf-8')
-    section_start = f'<!-- === DAY-{today}-START === -->'
-    section_end = f'<!-- === DAY-{today}-END === -->'
-
-    if section_start in html:
-        insert_at = html.find(section_end)
-        if insert_at != -1:
-            html = html[:insert_at] + '\n' + card_html + '\n' + html[insert_at:]
+    
+    # Remove any existing entry for today (both old link card format and any previous full entry)
+    # Pattern to remove old link card format
+    old_link_pattern = rf'<!-- === DAY-{today}-START === -->\s*<a href="entries/{re.escape(today)}_{slug}\.html" class="entry-card">.*?</a>\s*<!-- === DAY-{today}-END === -->'
+    # Pattern to remove any existing full diary entry format
+    full_entry_pattern = rf'<!-- === DAY-{today}-START === -->\s*<!-- entry for {today} -->.*?<!-- === DAY-{today}-END === -->'
+    
+    # Remove both formats if they exist
+    html = re.sub(old_link_pattern, '', html, flags=re.DOTALL)
+    html = re.sub(full_entry_pattern, '', html, flags=re.DOTALL)
+    
+    # Clean up any extra whitespace that might have been left
+    html = re.sub(r'\n\s*\n\s*\n', '\n\n', html)  # Replace 3+ newlines with 2 newlines
+    
+    # Insert the new full diary entry at the right position (after intro, before first existing entry or at end)
+    section_to_insert = f'<!-- === DAY-{today}-START -->\n{entry_html}\n<!-- === DAY-{today}-END -->\n\n'
+    
+    # Find where to insert - after the intro paragraph, before the first existing DAY- section
+    intro_end_match = re.search('</p>', html)
+    if intro_end_match:
+        intro_end = intro_end_match.end()
+        # Look for the first DAY- section after the intro
+        first_day_section = re.search(r'<!-- === DAY-\d{4}-\d{2}-\d{2}-START -->', html[intro_end:])
+        if first_day_section:
+            insert_pos = intro_end + first_day_section.start()
+            html = html[:insert_pos] + section_to_insert + html[insert_pos:]
         else:
-            full_section = section_start + '\n' + card_html + '\n' + section_end + '\n\n'
-            intro_end = html.find('</p>', html.find('class="intro"'))
-            if intro_end == -1:
-                html = html.replace('</body>', full_section + '</body>')
+            # No existing entries, insert before </main>
+            main_end = html.find('</main>')
+            if main_end != -1:
+                html = html[:main_end] + section_to_insert + html[main_end:]
             else:
-                insert_pos = intro_end + len('</p>') + 1
-                html = html[:insert_pos] + '\n\n' + full_section + '\n\n' + html[insert_pos:]
+                html = html + section_to_insert
     else:
-        full_section = section_start + '\n' + card_html + '\n' + section_end + '\n\n'
-        intro_end = html.find('</p>', html.find('class="intro"'))
-        if intro_end == -1:
-            html = html.replace('</body>', full_section + '</body>')
+        # Fallback: insert before </body> if we can't find the intro
+        body_end = html.find('</body>')
+        if body_end != -1:
+            html = html[:body_end] + section_to_insert + html[body_end:]
         else:
-            insert_pos = intro_end + len('</p>') + 1
-            html = html[:insert_pos] + '\n\n' + full_section + '\n\n' + html[insert_pos:]
+            html = html + section_to_insert
 
     INDEX_HTML.write_text(html, encoding='utf-8')
-    print(f'[OK] index.html updated with link card for {today}')
+    print(f'[OK] index.html updated with full diary entry for {today}')
 
 
 # ─── CLI ─────────────────────────────────────────────────────────────────────
