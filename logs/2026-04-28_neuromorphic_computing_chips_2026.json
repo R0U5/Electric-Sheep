@@ -1,0 +1,39 @@
+{
+  "date": "2026-04-28",
+  "topic": "neuromorphic computing chips 2026",
+  "summary": "Neuromorphic computing has crossed from academic prototype to commercial product in 2026, with 596 patents filed through early 2026 and a 401% surge in 2025 alone. The core innovation is spiking neural networks (SNNs) — chips where neurons fire only when needed, rather than running constant calculations. This event-driven model delivers 100–1000x better energy efficiency than GPUs on workloads like pattern recognition and real-time learning.\n\nIntel's Loihi 2 and IBM's TrueNorth remain the dominant research platforms. Intel's Hala Point system now deploys 1.15 billion neurons, and Loihi 3 achieves roughly 10,000x better energy efficiency than GPUs for specific pattern-recognition tasks. IBM's TrueNorth (2014) had 1 million neurons and 256 million synapses, focused on large-scale neural simulation and energy efficiency. Newer entrants like BrainChip's Akida target edge IoT devices, running on milliwatts — enough for years of battery life. IBM's NorthPole is also cited as a research leader for 2026.\n\nThe commercial picture is more nuanced. The neuromorphic hardware market generated roughly $50 million in 2025 and is projected to reach $185 million by 2030 — real growth, but still small. NVIDIA's Jetson Orin Nano and Raspberry Pi AI HAT+ implement neuromorphic principles commercially, blurring the line between true SNN chips and brain-inspired accelerators. The actual production-grade options for developers remain limited — most neuromorphic chips are research-only or locked to specific ecosystems.\n\nThe biggest gap in the field is toolchain maturity. Writing for neuromorphic hardware requires learning SNN frameworks like NEST or SpyTorch, which have none of the ecosystemConvenience of CUDA. Until that improves, neuromorphic chips will stay in the lab despite the raw efficiency numbers.",
+  "sources_count": 6,
+  "sources": [
+    {
+      "title": "Neuromorphic computing chip patents surge 401% in 2025",
+      "url": "https://www.patsnap.com/resources/blog/articles/neuromorphic-computing-chip-patents-surge-401-in-2025/",
+      "snippet": "596 patents filed through early 2026 with a 401% surge in 2025; brain-inspired spiking neural network chips delivering 100–1000x energy efficiency gains over GPUs on event-driven workloads."
+    },
+    {
+      "title": "Neuromorphic Computing in 2025: How Brain-Inspired Chips Are Redefining AI Performance",
+      "url": "https://devtechinsights.com/neuromorphic-chips-2025/",
+      "snippet": "Market growing at 108% CAGR; Intel Loihi 3 achieves 10,000x better energy efficiency than GPUs for pattern recognition; neuromorphic chips running on milliwatts for edge IoT."
+    },
+    {
+      "title": "Neuromorphic computing at scale (Nature, Jan 2025)",
+      "url": "https://www.nature.com/articles/s41586-024-08253-8",
+      "snippet": "Authoritative academic review covering large-scale neuromorphic systems, co-design challenges, and the path from prototype to production-grade brain-inspired hardware."
+    },
+    {
+      "title": "A New Era in Computing: A Review of Neuromorphic Computing Chip Architecture and Applications (MDPI)",
+      "url": "https://www.mdpi.com/2674-0729/5/1/3",
+      "snippet": "Comprehensive peer-reviewed survey of neuromorphic chip architectures, SNN operating principles, and applications spanning pattern recognition and robotics."
+    },
+    {
+      "title": "Best Neuromorphic Chips 2026: Brain-Inspired AI Hardware",
+      "url": "https://www.propelrc.com/best-neuromorphic-chips/",
+      "snippet": "Practical roundup testing Intel Loihi 2, IBM NorthPole, NVIDIA Jetson Orin Nano, and Raspberry Pi AI HAT+ for edge AI workloads; notes the gap between research platforms and commercially available hardware."
+    },
+    {
+      "title": "Spiking Neural Networks: A Comprehensive Survey of Training Methods for Neuromorphic Hardware (IEEE)",
+      "url": "https://ieeexplore.ieee.org/abstract/document/11201000",
+      "snippet": "Technical survey of SNN training methods across Intel Loihi, IBM TrueNorth, SpiNNaker, and BrainScaleS hardware platforms, covering applications from computer vision to brain-computer interfaces."
+    }
+  ],
+  "model_used": "openrouter/minimax/minimax-m2.7"
+}

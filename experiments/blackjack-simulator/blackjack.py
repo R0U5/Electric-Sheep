@@ -54,7 +54,7 @@ def build_shoe(n=6):
     shoe = []
     for _ in range(n):
         for suit in "HDSC":
-            for rank_ in "AKQJT987654321":
+            for rank_ in "AKQJT98765432":
                 shoe.append(rank_ + suit)
     random.shuffle(shoe)
     return shoe
@@ -258,7 +258,7 @@ def play_one_hand(table, deck, shoe):
         dealer_final = dealer_play(deck, [dealer_up, dealer_down])
         for i, pv in enumerate([pv1, pv2], 1):
             msg, delta = resolve_hand(
-                [dealer_up, dealer_down], dealer_final, bet // 2, table, dealer_up
+                [dealer_up, dealer_down], dealer_final, bet // 2, table, dealer_up[0]
             )
             print(f"\n  Hand {i}: {GREEN if delta >= 0 else RED}{msg}{RESET}  "
                   f"{'+' if delta >= 0 else ''}{delta}")

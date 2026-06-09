@@ -1,0 +1,33 @@
+{
+  "date": "2026-04-28",
+  "topic": "quantization methods GGUF Q4 vs Q5 vs Q8 output quality creative tasks",
+  "sources_count": 4,
+  "sources": [
+    {
+      "title": "Q4_K_M vs Q5_K_M vs Q8 — Which GGUF Quantization Should You Use? (2026 Guide)",
+      "url": "https://willitrunai.com/blog/quantization-guide-gguf-explained",
+      "snippet": "Q4_K_M saves 72% VRAM with minor quality loss. Q5_K_M is the sweet spot. Q8 is near-lossless but 2x larger. Full comparison with VRAM, perplexity, and speed by model size.",
+      "content_preview": "Quantization is the technology that makes running large AI models on consumer hardware possible. Without it, a 70B parameter model would require roughly 140GB of VRAM... With Q4 quantization, that same model fits in under 40GB. Quantization reduces the precision of weights from 16-bit floats to 8-bit, 4-bit, or 2-bit integers. The trade-off: less precision means smaller files and lower memory, but some quality loss. Q4_K_M is the most popular quant for consumer GPUs, offering the best balance of size and quality. Q5_K_M adds a bit more precision for creative tasks where subtle output differences matter. Q8 is nearly lossless but doubles the file size compared to Q4."
+    },
+    {
+      "title": "GGUF, Q4, Q8, fp16: A Pleb's Guide to LLM Quantization",
+      "url": "https://d-central.tech/quantization-explained-gguf-q4-q8-fp16/",
+      "snippet": "Quantization is lossy compression for LLMs — same idea as JPEG for photos. It's the reason a used 3090 runs 70B models and an 8 GB laptop runs Phi-3.5. Here's what the Q4_K_M and GGUF suffixes actually mean.",
+      "content_preview": "GGUF is the current standard format for LLM quants. The 'K' in Q4_K_M refers to the quantization method (K-quants), and 'M' means mixed — some layers use higher precision than others. For creative tasks (writing, coding, art prompts), Q5_K_M is often recommended over Q4 because creative output is more sensitive to precision loss. Q4 can sometimes produce repetitive or slightly 'off' creative writing, while Q5 preserves more nuance. Q8 is virtually indistinguishable from fp16 for most users."
+    },
+    {
+      "title": "GGUF Quantization Guide: Q4, Q5, Q8 Explained | LocalClaw",
+      "url": "https://localclaw.io/blog/quantization-guide",
+      "snippet": "Complete Guide: Q4 Q5 Q8 Quantization Explained Which quantization to choose for your LLMs? Impact on quality, size, and performance. Everything you need to understand about GGUF and K-quants.",
+      "content_preview": "For creative tasks specifically: Q4_K_M works well for most casual creative use. Q5_K_M is better for professional creative work where output quality is critical. Q8 is overkill for most users but useful for benchmarking or when you need the absolute best quality. The difference between Q4 and Q5 in creative tasks is subtle but measurable — Q5 produces more coherent long-form creative writing, while Q4 may lose thread of complex narratives slightly faster."
+    },
+    {
+      "title": "GGUF Quantization: Quality vs Speed on Consumer GPUs",
+      "url": "https://dasroot.net/posts/2026/02/gguf-quantization-quality-speed-consumer-gpus/",
+      "snippet": "Compare GGUF, GPTQ, and AWQ quantization formats for LLMs on consumer GPUs. Learn how to balance model quality, speed, and memory usage with Q4_K_M, IQ4_XS, and Q3_K_S variants.",
+      "content_preview": "Benchmarks show Q4_K_M has a perplexity score within 2-3% of fp16 on most models, while Q5_K_M is within 1%. For creative tasks, human evaluators rate Q5_K_M output as 95% as good as fp16, versus 88% for Q4_K_M. Speed-wise, Q4 is 10-15% faster than Q5, which is 5-10% faster than Q8. On an 8GB GPU like the RTX 4070, Q4 lets you run 7B models with room to spare, while Q8 would fill most of the VRAM for the same model."
+    }
+  ],
+  "generated_by": "Goblin (manual research via OpenClaw tools)",
+  "model_used": "openrouter/tencent/hy3-preview:free"
+}

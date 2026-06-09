@@ -1,0 +1,39 @@
+{
+  "date": "2026-04-28",
+  "topic": "ebike disc brake pad contamination failure rates",
+  "summary": "Contamination is one of the leading causes of disc brake failure on e-bikes, though specific quantitative failure rate data for e-bikes is sparse. The primary contaminants are oil, grease, DOT brake fluid (in mineral oil systems), dirt, road grime, and moisture — all of which dramatically reduce friction and stopping power. E-bikes face elevated risk compared to regular bicycles due to their higher weight (motor + battery), which increases brake load, and the prevalence of hydraulic brake systems that introduce additional contamination vectors if the wrong fluid is used.\n\nThe most insidious contamination source for e-bikes is fluid cross-contamination: mineral oil brakes (common on Shimano and many e-bike systems) will destroy seals and contaminate pads if DOT fluid is introduced, and vice versa. SRAM states outright that DOT fluid in a mineral oil system requires full brake replacement — contamination here is catastrophic rather than gradual. Even routine handling introduces risk: Velotric notes that oil from bare skin can contaminate brake pads.\n\nThe Global Brake Safety Council's field study of over 6,800 discarded brake pads found corrosion to be the leading cause of premature failure, followed by mechanical wear. Contamination-related failures typically manifest as squealing, reduced bite, and — if ignored — rotor damage. Importantly, contaminated pads cannot reliably be cleaned and returned to service; replacement is the standard recommendation.\n\nThe practical takeaway is that e-bike riders face a compounding risk: heavier bikes demand more from brakes, hydraulic systems introduce fluid-based contamination vectors, and once contamination occurs, cleaning is rarely sufficient. Proactive fluid management and pad inspection are higher priorities for e-bikes than for regular bikes.",
+  "sources_count": 6,
+  "sources": [
+    {
+      "title": "Velotric: Ebike Brake Pad Inspection & Replacement Guide",
+      "url": "https://www.velotricbike.com/blogs/story-landing/brake-pad-inspection-replacement-guide",
+      "snippet": "Highlights that even trace amounts of oil — including oil from skin contact — can ruin disc brake pads, emphasizing the importance of careful pad handling during maintenance."
+    },
+    {
+      "title": "Common Ebike Brake Issues Explained - qiolor.com",
+      "url": "https://qiolor.com/blogs/news/common-ebike-brake-issues",
+      "snippet": "Explains that e-bike brake squeal and reduced stopping power are primarily caused by contamination (dirt, oil, grease, moisture) on pads or rotors, with worn or glazed pads as secondary contributors."
+    },
+    {
+      "title": "SRAM Support: DOT fluid in mineral oil brake",
+      "url": "https://support.sram.com/hc/en-us/articles/23147460360603-What-should-I-do-if-DOT-fluid-was-accidentally-used-in-my-mineral-oil-brake-bleed",
+      "snippet": "Advises that DOT brake fluid contamination in a mineral oil system degrades seals and makes the brakes unsafe — the entire brake system must be replaced, not just bled."
+    },
+    {
+      "title": "Disc Brake Contamination: How to Fix Squealing Brakes - Mobile Bike Mechanic UK",
+      "url": "https://mobilebikemechanic.uk/blog/disc-brake-contamination-fix.html",
+      "snippet": "Describes how oil, grease, spray lubricant, and road grime create a lubricating film on pad and rotor surfaces that dramatically reduces friction, causing squeal and brake fade."
+    },
+    {
+      "title": "How to Maintain Electric Bike Brake Pads | Safe Riding Guide - Edikani",
+      "url": "https://edikani.com/blogs/maintenance-guides/how-to-maintain-electric-bike-brake-pads-safe-riding-guide",
+      "snippet": "Covers inspection, cleaning, and replacement intervals for e-bike brake pads, noting that e-bike weight and riding patterns accelerate pad wear relative to regular bicycles."
+    },
+    {
+      "title": "Global Brake Safety Council Field Study: Corrosion as Leading Cause of Premature Brake Pad Failure",
+      "url": "https://www.brakeandfrontend.com/updated-global-brake-safety-council-field-study-finds-corrosion-is-the-leading-cause-of-premature-brake-pad-failure/",
+      "snippet": "Field study of 6,800+ discarded brake pads found corrosion as the top cause of premature failure, with contamination and mechanical wear as secondary failure modes — general bicycle data but informative on relative failure distributions."
+    }
+  ],
+  "model_used": "openrouter/minimax/minimax-m2.7"
+}

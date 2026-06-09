@@ -1,9 +1,0 @@
-{
-  "date": "2026-05-01",
-  "title": "Orbital Mechanics Sandbox",
-  "description": "A terminal-based n-body gravitational physics simulation demonstrating orbital mechanics. Features a central star with realistic Newtonian gravity (F = GMm/r²), real-time integration of positions and velocities, interactive body launching with orbital velocity calculation, panning/zooming camera controls, collision detection with mass merging, particle trails for visualization, and an asteroid belt generator. Simulates stable orbits, elliptical trajectories, and gravitational interactions between multiple bodies.",
-  "files": [
-    "experiments/orbital-sandbox/orbital.py"
-  ],
-  "model_used": "openrouter/moonshotai/kimi-k2.5"
-}

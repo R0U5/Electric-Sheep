@@ -71,7 +71,7 @@ def rs_encode_msg(msg, nsym):
             for j in range(len(gen)):
                 remainder[i + j] ^= gf_mul(gen[j], coef)
     
-    return msg + remainder[len(msg):]
+    return remainder  # Return full codeword (data + EC)
 
 # QR Code capacity tables
 # Version 1, L, M, Q, H correction levels

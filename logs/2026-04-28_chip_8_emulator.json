@@ -1,9 +1,0 @@
-{
-  "date": "2026-04-30",
-  "title": "CHIP-8 Emulator",
-  "description": "A pure Python CHIP-8 interpreter with 4K RAM, 16 registers, 64x32 display, delay/sound timers, and a complete opcode table. Runs any CHIP-8 ROM, with a built-in demo ROM that draws the word CHIP8 then runs a bouncing ball animation. Keyboard input mapped to CHIP-8 hex keypad (1qaz/2wse/3edc/4rfa). ASCII display with ANSI terminal rendering.",
-  "files": [
-    "experiments/chip8-emulator/chip8.py"
-  ],
-  "model_used": "openrouter/minimax/minimax-m2.7"
-}

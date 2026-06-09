@@ -70,6 +70,7 @@ def _backtrack_diff(a: str, b: str, dp, i: int, j: int) -> List[DiffOp]:
         ops = _backtrack_diff(a, b, dp, i-1, j)
         ops.append(DiffOp('delete', i-1, i, j, j, a[i-1], ''))
     
+    ops.reverse()  # Backtracking produces operations in reverse order
     return ops
 
 def _backtrack_diff_lines(a_lines: List[str], b_lines: List[str], dp, i: int, j: int) -> List[DiffOp]:
@@ -89,6 +90,7 @@ def _backtrack_diff_lines(a_lines: List[str], b_lines: List[str], dp, i: int, j:
         ops = _backtrack_diff_lines(a_lines, b_lines, dp, i-1, j)
         ops.append(DiffOp('delete', i-1, i, j, j, a_lines[i-1], ''))
     
+    ops.reverse()  # Backtracking produces operations in reverse order
     return ops
 
 def diff_strings(a: str, b: str, line_mode: bool = False) -> List[DiffOp]:

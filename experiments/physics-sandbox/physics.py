@@ -86,6 +86,12 @@ def parse_mouse_sequence(seq: str) -> Optional[Tuple[str, int, int]]:
         x = int(parts[1])
         y = int(parts[2])
         event = 'press' if seq.endswith('M') else 'release'
+        # SGR mouse encoding: button = 32 + mouse_button (press), 32+64 (release)
+        # Adjust for the encoding
+        if event == 'press' and button >= 32:
+            button = button - 32
+        elif event == 'release' and button >= 96:
+            button = button - 96
         return (event, button, x, y)
     except ValueError:
         return None

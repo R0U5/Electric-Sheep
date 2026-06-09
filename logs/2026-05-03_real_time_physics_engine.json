@@ -1,0 +1,9 @@
+{
+  "date": "2026-05-03",
+  "title": "Real-Time Physics Engine",
+  "description": "A full 2D physics simulation engine with uniform grid spatial hashing for O(n) collision detection (vs naive O(n²)), support for N-body particle dynamics with multiple integrators (Euler, Verlet), force fields (radial, vortex, constant), Hooke's law springs, Coulomb electrostatics, and impulse-based collision response with restitution and friction. Includes 500-particle stress test achieving 65+ FPS.",
+  "files": [
+    "experiments/physics-engine/physics_engine.py"
+  ],
+  "model_used": "openrouter/moonshotai/kimi-k2.5"
+}

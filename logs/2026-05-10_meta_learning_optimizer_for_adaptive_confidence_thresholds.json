@@ -1,0 +1,7 @@
+{
+  "date": "2026-05-10",
+  "title": "Meta-Learning Optimizer for Adaptive Confidence Thresholds",
+  "description": "",
+  "files": [],
+  "model_used": "openrouter/nvidia/nemotron-3-super-120b-a12b:free"
+}
