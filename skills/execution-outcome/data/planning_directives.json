@@ -1,0 +1,42 @@
+{
+  "generated": "2026-06-09T09:36:52.977585+00:00",
+  "total_outcomes_analyzed": 15,
+  "recommendations": [
+    {
+      "strategy": "web_search_and_synthesize",
+      "success_rate": 1.0,
+      "uses": 4,
+      "directive": "Consider 'web_search_and_synthesize' for similar tasks (success rate: 100%)."
+    },
+    {
+      "strategy": "unknown",
+      "success_rate": 0.667,
+      "uses": 3,
+      "directive": "Consider 'unknown' for similar tasks (success rate: 67%)."
+    }
+  ],
+  "avoid": [
+    {
+      "strategy": "self-healing-retry",
+      "uses": 2,
+      "directive": "AVOID 'self-healing-retry' \u2014 never succeeded in 2 attempts."
+    }
+  ],
+  "cautions": [
+    {
+      "task": "Research how agent reflection improves self-correction rates",
+      "calibration_gap": 0.45,
+      "directive": "Confidence calibration issue: predicted 40% but reality was 85%. Be more conservative when planning similar tasks."
+    },
+    {
+      "task": "Fix metacognitive action router data file corruption",
+      "calibration_gap": 0.6,
+      "directive": "Confidence calibration issue: predicted 30% but reality was 90%. Be more conservative when planning similar tasks."
+    },
+    {
+      "task": "Debug cron job that fires during maintenance window",
+      "calibration_gap": 0.4,
+      "directive": "Confidence calibration issue: predicted 60% but reality was 20%. Be more conservative when planning similar tasks."
+    }
+  ]
+}

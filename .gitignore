@@ -1,2 +1,12 @@
 .env
 __pycache__/
+
+# Workspace clutter - not part of Electric Sheep project
+temp_*.py
+test_*.py
+task_*.md
+daily_log*.txt
+*.backup
+*.bak
+node_modules/
+venv/

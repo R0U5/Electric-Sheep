@@ -1,0 +1,28 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-06-09T09:35:13.146444+00:00",
+      "reflections": 15,
+      "profiles": 7,
+      "directives": 1
+    },
+    {
+      "timestamp": "2026-06-09T09:36:37.372310+00:00",
+      "reflections": 0,
+      "profiles": 7,
+      "directives": 1
+    },
+    {
+      "timestamp": "2026-06-09T09:36:52.884975+00:00",
+      "reflections": 0,
+      "profiles": 7,
+      "directives": 1
+    }
+  ],
+  "last_run": "2026-06-09T09:36:52.884957+00:00",
+  "last_run_stats": {
+    "reflections_generated": 0,
+    "profiles_analyzed": 7,
+    "directives_produced": 1
+  }
+}

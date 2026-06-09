@@ -1,0 +1,74 @@
+{
+  "web_search_and_synthesize": {
+    "strategy": "web_search_and_synthesize",
+    "total_uses": 4,
+    "success_count": 4,
+    "partial_count": 0,
+    "failure_count": 0,
+    "success_rate": 1.0,
+    "last_used": "2026-06-09T09:36:28.037854+00:00"
+  },
+  "web_fetch_and_summarize": {
+    "strategy": "web_fetch_and_summarize",
+    "total_uses": 1,
+    "success_count": 0,
+    "partial_count": 1,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "last_used": "2026-05-27T04:39:13.018238+00:00"
+  },
+  "reproduce_isolate_fix": {
+    "strategy": "reproduce_isolate_fix",
+    "total_uses": 2,
+    "success_count": 1,
+    "partial_count": 0,
+    "failure_count": 1,
+    "success_rate": 0.5,
+    "last_used": "2026-05-27T04:39:30.748504+00:00"
+  },
+  "read_modify_test": {
+    "strategy": "read_modify_test",
+    "total_uses": 1,
+    "success_count": 1,
+    "partial_count": 0,
+    "failure_count": 0,
+    "success_rate": 1.0,
+    "last_used": "2026-05-27T04:39:35.281477+00:00"
+  },
+  "unknown": {
+    "strategy": "unknown",
+    "total_uses": 3,
+    "success_count": 2,
+    "partial_count": 0,
+    "failure_count": 1,
+    "success_rate": 0.667,
+    "last_used": "2026-05-30T09:34:24.572619+00:00"
+  },
+  "self-healing-retry": {
+    "strategy": "self-healing-retry",
+    "total_uses": 2,
+    "success_count": 0,
+    "partial_count": 2,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "last_used": "2026-05-30T09:34:19.968120+00:00"
+  },
+  "read_build_publish_pipeline": {
+    "strategy": "read_build_publish_pipeline",
+    "total_uses": 1,
+    "success_count": 0,
+    "partial_count": 1,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "last_used": "2026-06-08T09:35:27.091413+00:00"
+  },
+  "reflection_pipeline": {
+    "strategy": "reflection_pipeline",
+    "total_uses": 1,
+    "success_count": 1,
+    "partial_count": 0,
+    "failure_count": 0,
+    "success_rate": 1.0,
+    "last_used": "2026-06-09T09:36:52.976179+00:00"
+  }
+}
