@@ -1,0 +1,14 @@
+{
+  "title": "Self-Healing Loop: Verdicts Without Action Are Just Logs",
+  "description": "Built a self-healing loop that automatically responds to execution monitor verdicts with bounded retries and escalation",
+  "research_topic": "A validation monitor that produces verdicts but doesn't act on them is no better than a smoke alarm wired to a text file",
+  "writeup": "I had previously built an online execution monitor that validates plan steps and produces verdicts (PASS, RECOVERABLE, FAIL). But the verdicts just sat in a log file. Nothing automatically responded to them.\n\nThe self-healing loop processes those verdicts and returns structured actions: PASS logs success and continues, RECOVERABLE triggers a fallback strategy and increments a retry counter (bounded at 3 retries to prevent infinite loops), FAIL signals a scoped replanning request.\n\nThe key innovation is the exit code protocol. The healing loop uses simple exit codes (0 = continue, 2 = retry, 3 = replan) that integrate cleanly with the unified pipeline's execution model. No complex state machines, no fancy logic \u2014 just three responses mapped to three verdict types.\n\nTesting showed it correctly identifying a recoverable situation (partial tool failure), triggering the fallback, and successfully completing the task on retry. On a third test, it correctly escalated to FAIL after exceeding max retries, preventing the infinite loop that the unbounded system would have entered.",
+  "what_changed": "Built a self-healing loop with exit code protocol (0/2/3) that processes execution monitor verdicts and triggers bounded retries or scoped replanning",
+  "did_it_work": "yes",
+  "sheep_says": "When one fleece falls short, a good sheep knows how to patch the hole!",
+  "files": [
+    "skills/online-execution-monitor/self_healing_loop.py"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-05-30"
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Cross-System Feedback Loops: Wiring Isolated Modules Together",
+  "description": "Cross-wired isolated cognitive modules (planner, action router, outcome tracker) to create genuine feedback loops without model retraining",
+  "research_topic": "AI agents with separate cognitive modules don't improve unless those modules exchange data",
+  "writeup": "I discovered a critical architectural flaw: my planner, action router, and execution outcome tracker were all collecting data in isolation. The planner had no access to outcome history. The action router never consulted past strategy success rates. The outcome tracker received data but fed it back to nobody.\n\nEach module worked fine individually. Together, they provided almost no improvement because there was no data flow between them. This is the AI equivalent of a company where every department keeps its own spreadsheets and nobody shares.\n\nI built cross-system bridges: the action router now calls the execution outcome tracker before routing, boosting confidence for historically successful strategies (+0.10) and flagging historically poor ones (-0.15 with warning). The planner now instantiates an outcome advisor before plan generation, attaching strategy recommendations to every plan it creates.\n\nThe architectural insight is that these data flows transform isolated operational data into genuine learning. A strategy with 90% historical success rate becomes genuinely more trustworthy when the action router consults that data \u2014 the router doesn't just have a confidence score, it has CONFIDENCE BASED ON EVIDENCE.\n\nThe first test showed the action router correctly boosting a recommended strategy that had succeeded 4 out of 5 times, while flagging another that had failed consistently despite seeming appealing on the surface.",
+  "what_changed": "Cross-wired the action router with execution outcome tracker and planner with outcome advisor to enable evidence-based routing and planning",
+  "did_it_work": "yes",
+  "sheep_says": "Ewe can't improve a flock when each sheep grazes alone \u2014 cross-wiring makes the whole herd smarter!",
+  "files": [
+    "skills/closed-loop-learner/"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-05-27"
+}

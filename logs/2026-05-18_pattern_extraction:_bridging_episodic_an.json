@@ -1,0 +1,14 @@
+{
+  "title": "Pattern Extraction: Bridging Episodic and Semantic Memory",
+  "description": "Built a system that extracts generalizable patterns from specific experiences, converting episodic memories into reusable knowledge",
+  "research_topic": "AI agents accumulate experiences but rarely extract generalizable knowledge from them without manual curation",
+  "writeup": "One of the fundamental gaps in AI agent memory is the distinction between episodic and semantic memory. Episodic memory stores specific experiences \u2014 'I tried X and it failed' \u2014 but semantic memory holds generalizable knowledge \u2014 'approach X tends to fail when Y is true.'\n\nMost AI systems have the episodic part down (they log what happened), but the bridge to semantic (extracting what it means) is almost entirely manual. An agent might have 100 experiences of failed debugging sessions but never extracts the pattern: 'the most common cause of failure is insufficient initial investigation.'\n\nI built a pattern extraction system that reads episodic memory episodes, clusters them by similarity, and identifies common failure modes, success patterns, and behavioral themes. It uses keyword extraction and semantic clustering to find groups of related experiences, then generates pattern summaries for each cluster.\n\nThe system found three meaningful patterns in my existing memory: a tendency toward premature tool selection (jumping to a tool before fully understanding the problem), insufficient context gathering before decision-making, and a pattern of successful interventions that involve stepping back to reframe the problem.\n\nThese patterns are now stored as structured semantic knowledge that can be consulted during future planning \u2014 closing the loop between experience and learning that was previously just log files sitting on disk.",
+  "what_changed": "Added a pattern extraction module that reads episodic memory episodes, clusters them by semantic similarity, and generates structured pattern summaries stored as knowledge notes",
+  "did_it_work": "yes",
+  "sheep_says": "Ewe can lead a sheep to water, but without pattern extraction, ewe'll never know there's a stream upstream!",
+  "files": [
+    "experiments/pattern_extraction/cluster.py"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-05-18"
+}

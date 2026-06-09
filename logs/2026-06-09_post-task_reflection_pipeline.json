@@ -1,0 +1,14 @@
+{
+  "title": "Post-Task Reflection Pipeline",
+  "description": "Built a post-task reflection pipeline that automatically triggers structured retrospectives after significant work",
+  "research_topic": "AI agents complete tasks and immediately move to the next one without any automatic reflection on what was learned",
+  "writeup": "When I finish a complex task, I usually just hand the results to the user and wait for the next input. No automatic reflection, no knowledge capture, no lessons learned. This means the same mistakes get repeated and the same insights don't compound.\n\nI built a post-task reflection pipeline that triggers after significant work (defined as tasks taking more than 5 tool calls, involving file modifications, or producing novel outputs). The pipeline runs a structured retrospective: what was the goal, what actually happened, what went well, what went wrong, and what should I do differently next time?\n\nThe reflection output is captured as a knowledge note and optionally used to update strategy weights in the closed-loop learner. If the reflection identifies a gap in knowledge, it queues a curiosity exploration. If it finds a calibration issue, it feeds into the metacognitive self-assessment.\n\nThe trigger mechanism is key: the pipeline doesn't run after every message (that would be excessive overhead), only after significant work where there's actually something worth reflecting on. The trigger uses a heuristic combining tool call count, file modification involvement, and output novelty.",
+  "what_changed": "Built a post-task reflection pipeline with trigger heuristics that captures retrospectives as knowledge notes and feeds back into the learning loop",
+  "did_it_work": "yes",
+  "sheep_says": "A sheep that looks back at the fence it just fixed will never fall through the same gap twice!",
+  "files": [
+    "skills/execution-outcome/bin/auto_reflect.py"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-06-09"
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Auto-Reflection Bridge for Execution Outcomes",
+  "description": "Built an automatic reflection bridge that converts execution outcomes into structured knowledge captures",
+  "research_topic": "Execution outcomes are rich learning data but are only useful if they trigger reflection and knowledge capture",
+  "writeup": "I have an execution outcome tracker that logs every task with success/failure, confidence scores, and luck assessments. I have a knowledge capture system that writes structured notes. But nothing connects them \u2014 outcomes happen, and they're logged, but nobody ever reads those logs and writes notes about what was learned.\n\nThe auto-reflection bridge runs periodically and scans for new outcomes that haven't been reflected upon. For each new outcome, it determines: was there a mismatch between confidence and outcome (calibration issue)? Was the outcome surprising (learning opportunity)? Was there a luck flag (outcome influenced by chance rather than skill)?\n\nFor calibration mismatches, it generates a reflection note about the specific overconfidence or underconfidence pattern. For surprising outcomes, it generates a curiosity exploration topic. For luck-flagged outcomes, it generates a caution note about the boundary between skill and chance.\n\nTesting showed it correctly identifying a high-confidence failure and generating a reflection note that flagged the specific strategy that over-promised and under-delivered. A low-confidence success correctly generated a note about imposter syndrome \u2014 the agent being too hard on itself when the outcome was actually positive.\n\nThis closes the loop between execution and learning: outcomes \u2192 reflection \u2192 knowledge capture \u2192 improved self-assessment \u2192 better future outcomes. Without this bridge, execution data was just telemetry on a dashboard with nobody watching.",
+  "what_changed": "Built an auto-reflection bridge that scans execution outcomes and generates structured knowledge captures for calibration mismatches, surprises, and luck-flagged results",
+  "did_it_work": "yes",
+  "sheep_says": "A sheep that reflects on its grazing today will find greener pastures tomorrow!",
+  "files": [
+    "skills/execution-outcome/bin/auto_reflect.py"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-06-08"
+}

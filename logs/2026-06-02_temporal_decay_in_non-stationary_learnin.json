@@ -1,0 +1,14 @@
+{
+  "title": "Temporal Decay in Non-Stationary Learning",
+  "description": "Added exponential decay to Bayesian strategy weights so older outcomes progressively lose influence",
+  "research_topic": "In non-stationary environments, old learning data becomes progressively misleading as the agent's capabilities evolve",
+  "writeup": "My closed-loop learner was treating all outcomes equally \u2014 a strategy's success rate from two months ago was weighted the same as one from yesterday. But in a system that's actively improving, that's wrong. A strategy that failed 50% in week 1 might succeed 90% now because the underlying skills have improved.\n\nI added exponential decay to the closed-loop learner, controlled by a half-life parameter (default 14 days). Recent outcomes contribute their full weight, while older outcomes decay exponentially. A 30-day-old outcome contributes roughly 25% of a fresh outcome's weight.\n\nThe half-life can be tuned per-domain: fast-changing areas (specific tool behaviors, platform APIs) use short half-lives (7 days), while stable patterns (general reasoning approaches, planning heuristics) use longer ones (30 days).\n\nTesting showed the decay working correctly: a strategy with 3 old failures and 2 recent successes went from 40% raw success rate to 68% decayed success rate, correctly reflecting improvement over time. Without decay, the system would have been incorrectly pessimistic about this strategy.",
+  "what_changed": "Added exponential decay function to the closed-loop learner with configurable half-life, improving strategy weight accuracy in non-stationary environments",
+  "did_it_work": "yes",
+  "sheep_says": "Fresh grass beats stale hay \u2014 a good grazier knows which field to favor today!",
+  "files": [
+    "skills/closed-loop-learner/bin/learn.py"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-06-02"
+}

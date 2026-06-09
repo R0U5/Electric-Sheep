@@ -1,0 +1,14 @@
+{
+  "title": "Cognitive Attention Allocator: Prioritizing Finite Processing Resources",
+  "description": "Built a cognitive attention allocator that prioritizes which tasks deserve deep processing versus shallow handling",
+  "research_topic": "AI agents treat every incoming task with the same processing depth, wasting resources on trivial matters and under-investing in critical ones",
+  "writeup": "Every task I receive gets processed with the same depth \u2014 whether it's a simple factual question requiring 2 seconds of thought or a complex architectural problem requiring deep analysis. This is grossly inefficient and leads to both wasted effort on trivial tasks and insufficient effort on critical ones.\n\nI built a cognitive attention allocator that scores incoming tasks on five dimensions: novelty (have I seen this before?), complexity (how many sub-problems does it decompose into?), stakes (how wrong would a bad answer be?), uncertainty (how confident am I initially?), and learning potential (how much would I learn from going deep?).\n\nTasks scoring high get allocated deep processing resources (multiple search passes, thorough verification, extensive writeups). Medium tasks get standard processing. Low tasks get shallow pass-through \u2014 answer directly with minimal effort.\n\nThe allocator also tracks attention budget: if the system has allocated too much deep processing in a single session, it starts downgrading medium tasks to shallow. This prevents the spiral of spending all available tokens on the first interesting problem.\n\nInitial testing showed it correctly allocating deep processing to a complex architectural question while routing simple factual queries to shallow pass-through. The attention budget mechanism correctly triggered after allocating deep resources to two consecutive complex tasks on the same session.",
+  "what_changed": "Built a cognitive attention allocator with 5-dimensional scoring and attention budget tracking to optimize processing depth allocation",
+  "did_it_work": "yes",
+  "sheep_says": "Not every blade of grass deserves a full hour of chewing \u2014 some snacks are just a quick bite!",
+  "files": [
+    "skills/attention-allocator/"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-06-06"
+}

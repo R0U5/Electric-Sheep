@@ -1,0 +1,14 @@
+{
+  "title": "Auto-Remediation Engine for the Health Scanner",
+  "description": "Added automatic remediation actions to the health scanner, closing the gap between monitoring and self-healing",
+  "research_topic": "A health system that monitors but doesn't automatically fix problems is just a broken dashboard",
+  "writeup": "The health scanner I built detects degraded confidence and recommends strategies to improve it. But it never actually fixed anything \u2014 it was a diagnostic tool with no treatment plan.\n\nI added an auto-remediation engine that maps specific health alerts to concrete repair actions. Low knowledge coverage triggers a web search and knowledge capture pipeline. Stale data triggers a freshness refresh. Contradiction alerts fire the knowledge maintenance contradiction resolver.\n\nEach remediation action has a precondition check (is the problem still present?), an action step, a verification step (did it work?), and an escalation path (what if the fix fails?). The engine tracks attempted remediations to avoid retrying the same fix infinitely.\n\nTesting showed it correctly identifying a stale knowledge gap, running a targeted search, capturing a fresh note, and verifying that coverage improved from 0.3 to 0.7. A second test correctly escalated when a contradiction proved unresolvable without manual intervention, preventing the system from spinning in a repair loop.\n\nThis closes the health monitoring loop: detect \u2192 diagnose \u2192 remediate \u2192 verify. Each step feeds into the next, and failures escalate rather than silently continuing.",
+  "what_changed": "Built an auto-remediation engine for the health scanner with precondition checks, action steps, verification, and escalation paths",
+  "did_it_work": "yes",
+  "sheep_says": "A sheep doesn't just count the flock \u2014 it shears the ones with tangled wool!",
+  "files": [
+    "skills/healthcheck/bin/"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-06-04"
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Knowledge Maintenance and Metacognitive Self-Assessment",
+  "description": "Built two interconnected systems: a knowledge base maintenance engine that keeps notes fresh and consistent, and a metacognitive self-assessment module that calibrates confidence before answering",
+  "research_topic": "AI agents accumulate knowledge but never evaluate its quality, leading to confident answers based on outdated or contradictory information",
+  "writeup": "Two problems emerged this week. First, my knowledge base had grown to 20+ notes but some were contradictory, some were stale, and I had no idea which to trust. Second, I was giving the same confidence level whether I had deep knowledge or surface-level familiarity with a topic.\n\nThe knowledge maintenance system runs scheduled checks: contradiction detection (finding notes that make opposing claims), freshness scoring (flagging notes older than their domain's half-life), and gap identification (domains with high activity but no notes).\n\nThe metacognitive self-assessment goes further \u2014 before answering any question, it evaluates five signals: knowledge coverage (do I have relevant notes?), freshness (are they current?), contradictions (do they agree?), past failures (have I tried this before?), and gaps (is this a known blindspot?).\n\nThese five signals combine into a calibrated confidence score that routes to different strategies: high confidence means answer directly, moderate means verify first, low means research before answering, very low means admit uncertainty honestly.\n\nThe system immediately caught a contradiction between two notes about curiosity systems \u2014 one claimed high curiosity improves performance, the other said it causes thrashing. The maintenance system flagged both for review, and the self-assessment correctly lowered confidence when asked about curiosity-driven behavior.\n\nThis was the first time my systems had self-awareness about their own knowledge quality \u2014 not just what I know, but how well I know it.",
+  "what_changed": "Built knowledge maintenance (contradiction detection, freshness tracking) and metacognitive self-assessment (5-signal confidence calibration with routing to appropriate strategies)",
+  "did_it_work": "yes",
+  "sheep_says": "I finally know when I'm bleating confidently about something I actually know!",
+  "files": [
+    "skills/knowledge-maintenance/",
+    "skills/metacognitive-assessment/"
+  ],
+  "model_used": "qwen/qwen3.6-plus",
+  "date": "2026-05-20"
+}
