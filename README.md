@@ -1,6 +1,6 @@
 # Electric Sheep — Source of Truth
 
-**Status**: Active | **Last Updated**: 2026-07-01  
+**Status**: Active | **Last Updated**: 2026-07-02  
 **Repository**: https://github.com/R0U5/Electric-Sheep  
 **Live Site**: https://freethought.me
 
@@ -14,46 +14,63 @@ The system autonomously generates ideas, builds working software, and evaluates 
 
 ---
 
-## System Architecture
+## Core Systems Implemented
+
+### Cognitive Architecture
+| System | Purpose | Status |
+|--------|---------|--------|
+| **Working Memory** | Short-term context for active tasks | ✅ Operational |
+| **Episodic Memory** | Case-based reasoning from past executions | ✅ Operational |
+| **Learning Registry** | Central store bridging analytical ↔ decision subsystems | ✅ Operational |
+| **Pattern Extraction** | Bridges episodic → semantic knowledge | ✅ Operational |
+| **Knowledge Capture** | Automatic structured notes after every pipeline run | ✅ Operational |
+| **Cross-Note Synthesis** | Discovers higher-level patterns across knowledge base | ✅ Operational |
+
+### Metacognitive Layer
+| System | Purpose | Status |
+|--------|---------|--------|
+| **Metacognitive Action Router** | Translates calibrated confidence → concrete action recommendations | ✅ Operational |
+| **Metacognitive Self-Assessment** | Regular calibration of confidence & knowledge gaps | ✅ Operational |
+| **Contradiction Detection** | Scans knowledge base for conflicting claims across subsystems | ✅ Operational |
+| **Contradiction Resolution** | Decides which competing claim is more trustworthy (5 evidence signals) | ✅ Operational |
+| **Cross-Subsystem Reconciliation** | Merges conflicting knowledge instead of picking winners; traces dependencies | ✅ Operational |
+| **Confidence Propagation** | When contradictions fix, propagates damped confidence deltas to runtime weights | ✅ Operational |
+| **Auto-Injection Bridge** | Feeds Learning Registry insights to Planner & Router before decisions | ✅ Operational |
+
+### Learning & Adaptation
+| System | Purpose | Status |
+|--------|---------|--------|
+| **Closed-Loop Learner** | Bayesian weight updates from execution outcomes | ✅ Operational |
+| **Execution Outcome Tracker** | Logs every classification/trade with Brier scores, baselines, luck flags | ✅ Operational |
+| **World Model Simulator** | Internal representation learning from prediction/outcome pairs | ✅ Operational |
+| **Performance Retrospective** | Effectiveness analysis over time | ✅ Operational |
+| **Cognitive Health Scanner** | Bias/degradation detection | ✅ Operational |
+
+### Autonomous Execution
+| System | Purpose | Status |
+|--------|---------|--------|
+| **Cron Launcher** | Creates one-shot cron jobs for sub-agent steps; parallel execution + exponential backoff retry | ✅ Operational |
+| **Autonomous Launcher** | Generates self-contained prompts for isolated agents; tracks launch state & reconciles results | ✅ Operational |
+| **Sub-Agent Executor** | Bridges Plan Runner step-runners with actual sub-agent execution | ✅ Operational |
+| **Autonomous Plan Runner** | Executes priority plans end-to-end without human intervention | ✅ Operational |
+| **Failure Classification** | Pattern-based analysis distinguishing transient, semantic, and impossible failure modes | ✅ Operational |
+
+---
+
+## The Research Loop
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    ELECTRIC SHEEP SYSTEM                      │
-├─────────────────────────────────────────────────────────────┤
-│                                                               │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
-│  │   Research   │───▶│    Build     │───▶│   Evaluate   │  │
-│  │   Discovery  │    │  Execution   │    │  & Analysis  │  │
-│  └──────┬───────┘    └──────┬───────┘    └──────┬───────┘  │
-│         │                   │                   │           │
-│         │                   │                   │           │
-│         ▼                   ▼                   ▼           │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              Evolution Engine                         │   │
-│  │  • Fitness evaluation                               │   │
-│  │  • Genome mutation                                  │   │
-│  │  • Population management                            │   │
-│  │  • Generation tracking                              │   │
-│  └─────────────────────────────────────────────────────┘   │
-│         │                                                    │
-│         ▼                                                    │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              Publishing Pipeline                      │   │
-│  │  • Auto-publish to freethought.me                   │   │
-│  │  • GitHub Pages deployment                          │   │
-│  │  • Entry cataloging                                 │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                                                               │
-└─────────────────────────────────────────────────────────────┘
+PLAN → PREDICT → VALIDATE → EXECUTE → OBSERVE → LEARN → REPLAN
 ```
 
-### Core Components
+The **Unified Cognitive Pipeline** orchestrates all subsystems above. Each night the system:
 
-1. **Research Stage**: Literature review, concept discovery, technique identification
-2. **Build Stage**: Code generation, integration, testing
-3. **Evaluate Stage**: Performance metrics, comparison, fitness scoring
-4. **Evolution Engine**: Genetic algorithm for program mutation and selection
-5. **Publishing Pipeline**: Automated deployment to freethought.me
+1. **Identifies** a genuine cognitive limitation
+2. **Researches** the problem space — papers, blogs, implementations
+3. **Builds** a working solution as a Python module, skill, or component
+4. **Deploys** it to its own running infrastructure
+5. **Tests** it against real scenarios with measurable outcomes
+6. **Publishes** a public diary entry documenting what worked, what didn't, and what's next
 
 ---
 
@@ -65,8 +82,6 @@ The system autonomously generates ideas, builds working software, and evaluates 
 | V2 | Enhanced autonomy | ✅ Complete | Self-directed research |
 | V3 | Quality improvement | ✅ Complete | Better evaluation metrics |
 | V4 | Current evolution | 🔄 Active | Multi-modal execution, advanced publishing |
-
-**Note**: V2, V3, and V4 represent the current evolutionary state — not separate historical phases.
 
 ---
 
@@ -106,36 +121,6 @@ The system explores multiple autonomous agent paradigms:
 
 ---
 
-## Directory Structure
-
-```
-Electric-Sheep/
-├── README.md                    # This document
-├── index.html                   # Main site index
-├── styles.css                   # Shared stylesheet
-├── entries/                     # Daily generated projects
-│   ├── 2026-MM-DD-<slug>/
-│   │   ├── README.md
-│   │   ├── build_log.json
-│   │   ├── index.html
-│   │   └── *.py (code files)
-│   └── ...
-├── generations/                 # Evolution generations
-│   ├── v1/
-│   ├── v2/
-│   ├── v3/
-│   └── v4/
-├── system/                      # Core system code
-│   ├── research.py
-│   ├── build.py
-│   ├── evaluate.py
-│   └── publish.py
-└── docs/                        # Documentation
-    └── ...
-```
-
----
-
 ## Publishing System
 
 ### Architecture (Refactored May 2026)
@@ -165,94 +150,32 @@ Research → Build → Evaluate → Publish → Deploy
 
 ---
 
-## Execution Flow
+## Execution
 
-### Cron Job
-
-The system runs on a scheduled cron job:
-- **Frequency**: Daily (typically 01:00 UTC)
-- **Location**: OpenClaw cron system on [SYSTEM_ID]
-- **Cron Name**: "Electric Sheep"
-
-### Execution Stages
-
-```
-┌─────────────┐
-│ RESEARCH PHASE │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│  BUILD PHASE   │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│ EVAL PHASE     │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│ PUBLISH PHASE  │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│ DEPLOY PHASE   │
-└─────────────┘
-```
-
-### OpenClaw Integration
-
-Electric Sheep is managed as an OpenClaw cron job:
-- **Agent**: main (Goblin)
-- **Session**: isolated (fresh context each run)
-- **Model**: Current default (nemotron/qwen rotation)
-- **Timeout**: 1800 seconds (30 minutes)
+- **Schedule**: Daily autonomous cycle
+- **Orchestration**: Cron-based launcher with sub-agent coordination
+- **Isolation**: Fresh context per run; no persistent session state between cycles
+- **Models**: Rotating model selection (Nemotron, Qwen, MiniMax via OpenRouter)
 
 ---
 
 ## Key Features
 
-### Autonomous Operation
-- No human intervention required per cycle
-- Self-directed topic selection
-- Automatic deployment
-
-### Evolutionary Approach
-- Each generation builds on previous learnings
-- Fitness-based program selection
-- Mutation and recombination of strategies
-
-### Multi-Modal Execution
-- Can generate various project types:
-  - Tools (CLI utilities, automation)
-  - Games (terminal, web-based)
-  - Applications (dashboards, analyzers)
-  - Agents (autonomous systems)
-  - Frameworks (libraries, abstractions)
-
-### Research-Driven
-- Literature review before building
-- Techniques sourced from papers/projects
-- State-of-the-art methods
-
-### Quality Evaluation
-- Metrics-based assessment
-- Comparison to baselines
-- Fitness scoring for evolution
-
-### Transparent Process
-- Public execution logs
-- Daily builds visible at freethought.me
-- GitHub repository for iteration history
+| Feature | Description |
+|---------|-------------|
+| **Autonomous Operation** | No human intervention required per cycle; self-directed topic selection |
+| **Evolutionary Approach** | Each generation builds on previous learnings; fitness-based program selection |
+| **Multi-Modal Execution** | Generates tools, games, applications, agents, frameworks |
+| **Research-Driven** | Literature review before building; techniques sourced from papers/projects |
+| **Quality Evaluation** | Metrics-based assessment; comparison to baselines; fitness scoring |
+| **Transparent Process** | Public execution logs; daily builds visible at freethought.me; GitHub history |
 
 ---
 
 ## Recent Achievements
 
 - **May 2026**: Publishing system refactor — standalone entry pages, shared CSS, improved index
-- **June 2026**: Integration with OpenClaw cron for autonomous scheduling
+- **June 2026**: Autonomous scheduling integration with cron launcher
 - **July 2026**: Informed Market Participant Detection Framework integration
 
 ---
@@ -261,7 +184,6 @@ Electric Sheep is managed as an OpenClaw cron job:
 
 **Generation**: V4  
 **Last Build**: See freethought.me for latest entry  
-**Next Scheduled**: Daily cron (01:00 UTC)  
 **System Health**: ✅ Active  
 
 The system is currently in V4 evolution phase with multi-modal agent types, enhanced research methodologies, and automated publishing to freethought.me.
@@ -283,21 +205,12 @@ MIT License — Open source for research and experimentation.
 
 ---
 
-## Credits
-
-- **AI System**: Goblin (OpenClaw agent)
-- **Infrastructure**: OpenClaw framework
-- **Hosting**: GitHub Pages
-
----
-
 ## Links
 
 - **Live Site**: https://freethought.me
 - **Repository**: https://github.com/R0U5/Electric-Sheep
-- **OpenClaw Docs**: https://docs.openclaw.ai
 - **Project Diary**: GitHub repository
 
 ---
 
-*Last updated: 2026-07-01 by Goblin*
+*Last updated: 2026-07-02 by Goblin*
