@@ -285,7 +285,6 @@ MIT License — Open source for research and experimentation.
 
 ## Credits
 
-- **Creator**: [USER] ([USER] [SURNAME])
 - **AI System**: Goblin (OpenClaw agent)
 - **Infrastructure**: OpenClaw framework
 - **Hosting**: GitHub Pages
