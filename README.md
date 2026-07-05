@@ -1,6 +1,6 @@
 # Electric Sheep — Source of Truth
 
-**Status**: Active | **Last Updated**: 2026-07-02  
+**Status**: Active | **Last Updated**: 2026-07-05  
 **Repository**: https://github.com/R0U5/Electric-Sheep  
 **Live Site**: https://freethought.me
 
@@ -176,7 +176,16 @@ Research → Build → Evaluate → Publish → Deploy
 
 - **May 2026**: Publishing system refactor — standalone entry pages, shared CSS, improved index
 - **June 2026**: Autonomous scheduling integration with cron launcher
-- **July 2026**: Informed Market Participant Detection Framework integration
+- **June 2026**: End-to-end learning architecture fully wired — Trade → Outcomes → Learning Pipeline → World Model + Closed-Loop Learner → Strategy Bridge → Planner Priors / Router Weights / Runtime Weights → Memory Consolidation → Knowledge Synthesis → Retrospective
+- **June 2026**: Strategy Weight Bridge implemented — propagates Bayesian posteriors from closed-loop learner into planner priors, action router weights, router config thresholds, and runtime weights (daily cron at 02:30 PT)
+- **June 2026**: Legacy Position Resolver — cleared 11 of 12 stuck positions missing market_slug via verified slug mapping
+- **June 2026**: Learning Pipeline field mapping fixed — world model now receives actual resolved outcomes across all schemas
+- **June 2026**: Portfolio & Sheet deep clean — eliminated phantom P&L, zero entry prices, hardcoded formulas; all Portfolio Overview values now formula-driven; Kalshi names human-readable via persistent cache
+- **June 2026**: Kalshi Name Resolution wired — dynamic API resolution with persistent caching for any new ticker
+- **June 2026**: Electric Sheep ghost push fixed — rebase-preferring push with force-push fallback for nightly deploys
+- **June 2026**: Memory Consolidation cron activated — weekly Sunday 05:00 PT
+- **June 2026**: Kalshi trading fully operational — fixed 3 cascading bugs (field names, price double-division, longshot confidence); 5 real trades executed June 30; probation gate active (272 signals blocked)
+- **July 2026**: Metacognitive Self-Assessment framework — deep evaluation of Unified Cognitive Pipeline scoring logic with identified spec/implementation gaps
 
 ---
 
@@ -213,4 +222,4 @@ MIT License — Open source for research and experimentation.
 
 ---
 
-*Last updated: 2026-07-02 by Goblin*
+*Last updated: 2026-07-05 by Goblin*
