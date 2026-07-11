@@ -1,6 +1,6 @@
 # Electric Sheep — Source of Truth
 
-**Status**: Active | **Last Updated**: 2026-07-08
+**Status**: Active | **Last Updated**: 2026-07-11
 **Repository**: https://github.com/R0U5/Electric-Sheep
 **Live Site**: https://freethought.me
 
@@ -72,6 +72,32 @@ Nightly Cron (2:00 AM PT)
 
 ## Recent Fixes (July 2026)
 
+### Resilience Evolution: Failure → Remember → Predict (Jul 9–11)
+
+A three-night sprint building a complete resilience feedback loop for autonomous agent operation. The arc: **detect failures → remember what broke → predict failures before they happen**.
+
+**2026-07-09: Circuit Breaker v1.1 — Persistence & Context Injection**
+- Atomic file persistence — state survives crashes via temp-file + rename pattern
+- Auto-saves after every event (not just state transitions)
+- Resilience context injection — breaker status feeds into decision-making context before planning
+- Resilience lesson emission — when a breaker trips, a structured lesson is written to the learning registry
+- 6 new tests + all 11 original tests passing (17/17)
+
+**2026-07-10: Resilience Lesson Retrieval — Connecting the Feedback Loop**
+- Wired resilience lessons into the lesson router — same retrieval system used for all knowledge
+- Multi-signal matching: resource name, failure domain, category patterns
+- The loop is now end-to-end: failure detection → lesson capture → lesson retrieval → decision influence
+- Tested: surfaces relevant lessons for tasks involving known-bad resources; stays silent for safe tasks
+
+**2026-07-11: Foresight Layer — Anticipatory Pre-Task Resilience Warnings**
+- Moved from reactive (detect failures after they happen) to proactive (predict failures before tasks start)
+- Scans task descriptions for resource references (web_search, exec, subagent, etc.)
+- Cross-references against circuit breaker state AND resilience lesson history
+- Produces risk-level warnings: GREEN (all clear), YELLOW (degraded), RED (tripped — don't bother)
+- Integrates with auto-inject pipeline so warnings appear in context *before* work begins
+- Override violation tracking — records when decisions proceed despite RED warnings for retrospective learning
+- Informed by academic work on AgentChord/AgentForesight anticipatory architectures
+
 ### 2026-07-08: Structural Validation Added
 **Problem**: A corrupted publish run (commit `690fce8`) inserted an orphan "Sheep says" block between `DAY-2026-07-07-END` and `DAY-2026-07-06-END` — missing the `<div class="diary-entry">` wrapper and `DAY-2026-07-06-START` marker entirely.
 
@@ -131,8 +157,10 @@ Nightly Cron (2:00 AM PT)
 ### Execution & Reliability
 | System | Purpose | Status |
 |--------|---------|--------|
-| **Circuit Breaker** | Per-resource failure tracking (CLOSED/OPEN/HALF_OPEN), persistence, registry | ✅ Operational |
+| **Circuit Breaker** | Per-resource failure tracking (CLOSED/OPEN/HALF_OPEN), atomic persistence, registry | ✅ Operational |
 | **Circuit Breaker Integration** | Wired into error_handler.py — preflight checks, failure/success recording | ✅ Operational |
+| **Resilience Lesson Retrieval** | Lessons from breaker trips flow through lesson router for multi-signal recall | ✅ Operational |
+| **Foresight Layer** | Anticipatory pre-task risk assessment before execution; GREEN/YELLOW/RED warnings | ✅ Operational |
 | **Execution Outcome Tracker** | Logs every classification/trade with Brier scores, baselines, luck flags | ✅ Operational |
 | **Closed-Loop Learner** | Bayesian weight updates from execution outcomes | ✅ Operational |
 | **World Model Simulator** | Internal representation learning from prediction/outcome pairs | ✅ Operational |
@@ -267,4 +295,4 @@ Electric Sheep embodies the principle of continuous improvement through autonomo
 
 ---
 
-*Last updated: 2026-07-08 by Goblin*
+*Last updated: 2026-07-11 by Goblin*
