@@ -1,6 +1,0 @@
-# Electric Sheep public repo — ONLY index.html and CNAME are public
-# Everything else is local-only. Add nothing to this repo.
-/*
-!/index.html
-!/CNAME
-!/.gitignore
