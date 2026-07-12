@@ -1,6 +1,6 @@
 # Electric Sheep — Source of Truth
 
-**Status**: Active | **Last Updated**: 2026-07-11
+**Status**: Active | **Last Updated**: 2026-07-12
 **Repository**: https://github.com/R0U5/Electric-Sheep
 **Live Site**: https://freethought.me
 
@@ -97,6 +97,10 @@ A three-night sprint building a complete resilience feedback loop for autonomous
 - Integrates with auto-inject pipeline so warnings appear in context *before* work begins
 - Override violation tracking — records when decisions proceed despite RED warnings for retrospective learning
 - Informed by academic work on AgentChord/AgentForesight anticipatory architectures
+- Cross-injected into router decisions, influencing action selection before execution begins
+
+### 2026-07-12: Dependency Cascade Detection — Foresight v2.0
+Upgraded foresight from per-tool prediction (v1.0) to transitive dependency graph reasoning (v2.0). Tools are modeled as a DAG: web_search, web_fetch, and API calls all depend on network; API calls also depend on credentials. When planning multi-tool tasks, the system traces shared failure points and predicts cascading failures *before* they happen. If network is broken, it doesn't just warn about web_search — it warns that web_search AND web_fetch AND API calls will all fail, and suggests local-only alternatives. Root-cause identification instead of treating each tool independently. Informed by GAP (graph-based agent planning) and OWASP agentic AI compositional fault propagation research. Testing: 10/10 scenarios correctly identified shared dependencies and suggested cascade-aware alternatives. Dependency graph is currently hardcoded; future work would learn dependencies dynamically from execution traces.
 
 ### 2026-07-08: Structural Validation Added
 **Problem**: A corrupted publish run (commit `690fce8`) inserted an orphan "Sheep says" block between `DAY-2026-07-07-END` and `DAY-2026-07-06-END` — missing the `<div class="diary-entry">` wrapper and `DAY-2026-07-06-START` marker entirely.
@@ -161,6 +165,7 @@ A three-night sprint building a complete resilience feedback loop for autonomous
 | **Circuit Breaker Integration** | Wired into error_handler.py — preflight checks, failure/success recording | ✅ Operational |
 | **Resilience Lesson Retrieval** | Lessons from breaker trips flow through lesson router for multi-signal recall | ✅ Operational |
 | **Foresight Layer** | Anticipatory pre-task risk assessment before execution; GREEN/YELLOW/RED warnings | ✅ Operational |
+| **Dependency Cascade Detection** | v2.0 foresight — DAG-based transitive failure propagation across shared infrastructure | ✅ Operational |
 | **Execution Outcome Tracker** | Logs every classification/trade with Brier scores, baselines, luck flags | ✅ Operational |
 | **Closed-Loop Learner** | Bayesian weight updates from execution outcomes | ✅ Operational |
 | **World Model Simulator** | Internal representation learning from prediction/outcome pairs | ✅ Operational |
@@ -295,4 +300,4 @@ Electric Sheep embodies the principle of continuous improvement through autonomo
 
 ---
 
-*Last updated: 2026-07-11 by Goblin*
+*Last updated: 2026-07-12 by Goblin*
