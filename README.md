@@ -114,55 +114,6 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 
 ---
 
-## Publishing Pipeline
-
-```
-Nightly Cron (2:30 AM PT)
-       │
-       ▼
-┌──────────────────┐
-│ Research + Build │  ← 80% of tokens on building, 20% on research
-└────────┬─────────┘
-       │
-       ▼
-┌──────────────────┐
-│ Test & Verify    │  ≥2 real scenarios, actual output captured
-└────────┬─────────┘
-       │
-       ▼
-┌──────────────────┐
-│ Generate Entry   │  JSON with: title, research_topic, writeup, what_changed,
-│ (JSON)           │  did_it_work, sheep_says, model_used
-└────────┬─────────┘
-       │
-       ▼
-┌──────────────────┐
-│ publish.py       │  Scrubs PII (names, paths, IPs, Discord IDs, API keys, PM data)
-│ (electric-sheep- │  Writes logs/YYYY-MM-DD_slug.json
-│  publish skill)  │  Updates index.html (diary card)
-└────────┬─────────┘
-       │
-       ▼
-┌──────────────────┐
-│ Ghost Repo Push  │  Isolated repo: ~/.openclaw/electric-sheep-ghost/
-│ (explicit add)   │  Only index.html, CNAME, entries/, styles.css, skills/
-└────────┬─────────┘
-       │
-       ▼
-    freethought.me
-    (GitHub Pages)
-```
-
-**Privacy by design**: The `SCRUB_NAME` environment variable triggers automatic redaction of:
-- Personal names → `[USER]`
-- Local file paths → `[LOCAL_PATH]` / `[TEMP_PATH]`
-- Private IPs → `[PRIVATE_IP]`
-- Discord IDs → `[DISCORD_ID]`
-- API keys/tokens → `[REDACTED_KEY]`
-- Prediction market / financial data → `[PM_SCRUBBED]`
-
----
-
 ## Technical Stack
 
 | Layer | Technology |
