@@ -72,6 +72,24 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **World Model Simulator** | Internal representation learning from prediction/outcome pairs | ✅ Operational |
 | **Performance Retrospective** | Effectiveness analysis over time | ✅ Operational |
 | **Cognitive Health Scanner** | Bias/degradation detection | ✅ Operational |
+| **Adaptive Signal Weights** | Hedge-style learner for all 6 signals; multiplicative updates boost accurate/suppress noisy; auto-logs predictions | ✅ Operational |
+| **Ensemble Disagreement Detection** | Computes variance/entropy/range/CV across signals; meta-uncertainty feeds decision advisor → lowers confidence on contradiction | ✅ Operational |
+| **Disagreement-Driven Recalibration** | Resolves disagreement vindication vs. outcomes; modulates Hedge learning rate per-signal (1.5× vindicated / 0.5× chronic false alarm) | ✅ Operational |
+| **Context-Aware Signal Weights & Thresholds** | Per-task-type (research/execution/tool_use/learning/exploration/retry) learned weights & thresholds; cold-start fallback to global/static | ✅ Operational |
+
+### Resilience & Self-Healing
+| System | Purpose | Status |
+|--------|---------|--------|
+| **Circuit Breaker System** | Detects repeatedly failing resources/tools; classifies failures (transient/semantic/impossible); emits resilience lessons | ✅ Operational |
+| **Persistent Circuit Breakers** | State survives restarts via durable JSON; no amnesia between sessions | ✅ Operational |
+| **Resilience Lesson Retrieval** | Resilience lessons feed lesson router, matched by resource/failure domain/category during planning | ✅ Operational |
+| **Foresight Layer** | Anticipatory resource scanner + risk assessor + violation tracking; GREEN/YELLOW/RED warnings | ✅ Operational |
+| **Dependency Cascade Detection** | Transitive dependency reasoning; detects when multiple tools share failing infrastructure | ✅ Operational |
+| **Reliability Drift Detection** | Dual-timescale EMA of per-signal vindication rates; detects non-stationary regimes; 30% learning boost during drift | ✅ Operational |
+| **Correlated Drift Clustering** | Groups temporally-close drift onsets into shared regime events with inferred causes; auto-flows from drift detector | ✅ Operational |
+| **Drift Root Cause Attribution** | Environmental snapshots at drift time vs. stable baselines; pinpoints specific factor (task context, tool chain, noise floor, session phase) | ✅ Operational |
+| **Remediation Prescription Engine** | Maps diagnosed causes → risk-graded action plans with verification, rollback, expected outcomes; outcome tracking → preference learning | ✅ Operational |
+| **Moment-to-Moment Wiring** | `after_tool` hook → circuit breaker integration → resilience lessons on every tool call | ✅ Operational |
 
 ### Autonomous Execution
 | System | Purpose | Status |
@@ -80,6 +98,8 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Autonomous Launcher** | Generates self-contained prompts for isolated agents; tracks launch state & reconciles results | ✅ Operational |
 | **Sub-Agent Executor** | Bridges Plan Runner step-runners with actual sub-agent execution | ✅ Operational |
 | **Autonomous Plan Runner** | Executes priority plans end-to-end without human intervention | ✅ Operational |
+| **Predictive Action Router** | Closes prediction→action gap; consults circuit breakers, foresight, cascade, history to select safest tool | ✅ Operational |
+| **Unified Decision Advisor** | Single decision layer fusing 6 signals (circuit breakers, foresight, cascade, history, confidence, learned context) → proceed/caution/alternative/avoid | ✅ Operational |
 
 ---
 
@@ -106,11 +126,11 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 - **Cross-Subsystem Reconciliation** — Synthesis strategy preserving partial truths from both sides; dependency tracing flags downstream conclusions
 - **Confidence Propagation** — Reconciliation → dependency graph → damped confidence deltas → runtime weights; idempotent, state-tracked
 
-### Resilience & Self-Healing (July 2026)
-- **Circuit Breaker System** — Detects when resources/tools are failing repeatedly, emits resilience lessons classifying failures as transient vs. impossible
-- **Persistent Circuit Breakers** — Circuit breaker state survives restarts via durable JSON on disk; no amnesia between sessions
-- **Resilience Lesson Retrieval** — Closed the inert knowledge gap: resilience lessons now feed into the lesson router, matched by resource name, failure domain, and category during task planning. Agents that are about to use a known-broken resource get warned before they start
-- **Self-Healing Cron Recovery** — Auto-detected missing `staleness_monitor.py` script, created it, and the cron retried successfully — full autonomous repair cycle without human intervention
+### June 2026 — Foundational Metacognitive Architecture
+Building the metacognitive core: self-reflection engine clustering failures into lessons, calibration tracking (Brier/ECE) correcting confidence, metacognitive router translating confidence → actions, contradiction detection/resolution/reconciliation across subsystems, confidence propagation through dependency graph, cross-domain lesson abstraction, proactive lesson application router, knowledge explorer + exploration executor closing the epistemic gap, lesson utility feedback loop with asymmetric penalties.
+
+### July 2026 — Resilience, Drift Intelligence & Unified Decisions
+Extending the architecture with a full self-healing stack: circuit breakers with persistence & lesson emission, foresight layer for anticipatory warnings, dependency cascade detection for transitive risk, predictive action router closing the prediction→action gap, unified decision advisor fusing 6 signals into one go/no-go, adaptive Hedge weights with context-aware per-task-type specialization, ensemble disagreement detection feeding meta-uncertainty back into confidence, disagreement-driven recalibration modulating learning rates by vindication history, reliability drift detection with dual-EMA regime awareness, correlated clustering grouping shared drift events, root cause attribution via environmental snapshots, remediation prescriptions mapping diagnoses to verified action plans, and moment-to-moment wiring hooking every tool call into the resilience loop.
 
 ---
 
@@ -174,4 +194,4 @@ Built by an AI agent (Goblin) with infrastructure provided by r0u5. The sheep qu
 
 ---
 
-*Last updated: July 10, 2026 — Resilience lesson retrieval closes the full failure→learning→decision feedback loop; 30+ nights of cumulative cognitive architecture improvements*
+*Last updated: July 21, 2026 — Resilience & drift intelligence stack complete; unified decision advisor with context-aware adaptive weights; full failure→attribution→remediation pipeline*
