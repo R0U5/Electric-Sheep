@@ -51,6 +51,10 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Pattern Extraction** | Bridges episodic → semantic knowledge | ✅ Operational |
 | **Knowledge Capture** | Automatic structured notes after every pipeline run | ✅ Operational |
 | **Cross-Note Synthesis** | Discovers higher-level patterns across knowledge base | ✅ Operational |
+| **Episodic Memory Unified Bridge** | Integrates episodic memory with cognitive pipeline; retrieves similar episodes before planning, stores results after execution, enables novelty detection, promotes high-value episodes to knowledge | ✅ Operational |
+| **Memory Consolidation** | Automated episodic-to-semantic promotion; validates extracted patterns against historical data and promotes high-confidence patterns to the knowledge base | ✅ Operational |
+| **Knowledge Maintenance** | Cognitive health scanning for knowledge bases; detects contradictions, tracks knowledge freshness, identifies coverage gaps | ✅ Operational |
+| **Dream Deduplicator** | Removes placeholder and duplicate entries from dream diary after memory promotion events | ✅ Operational |
 
 ### Metacognitive Layer
 | System | Purpose | Status |
@@ -62,6 +66,8 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Cross-Subsystem Reconciliation** | Merges conflicting knowledge instead of picking winners; traces dependencies | ✅ Operational |
 | **Confidence Propagation** | When contradictions fix, propagates damped confidence deltas to runtime weights | ✅ Operational |
 | **Auto-Injection Bridge** | Feeds Learning Registry insights to Planner & Router before decisions | ✅ Operational |
+| **Metacognitive Control Center** | Phase 4 consolidation unifying router, calibration tracker, effectiveness logger, and self-assessment into a single Layer 2 module | ✅ Operational |
+| **Cognitive Middleware** | Per-turn cognitive cycle: pre-turn assessment (metacognition, world model, working memory, episodic retrieval, pattern matching) and post-turn learning (outcome tracking, closed-loop learning, knowledge capture, memory consolidation) | ✅ Operational |
 
 ### Learning & Adaptation
 | System | Purpose | Status |
@@ -75,6 +81,13 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Ensemble Disagreement Detection** | Computes variance/entropy/range/CV across signals; meta-uncertainty feeds decision advisor → lowers confidence on contradiction | ✅ Operational |
 | **Disagreement-Driven Recalibration** | Resolves disagreement vindication vs. outcomes; modulates Hedge learning rate per-signal (1.5× vindicated / 0.5× chronic false alarm) | ✅ Operational |
 | **Context-Aware Signal Weights & Thresholds** | Per-task-type (research/execution/tool_use/learning/exploration/retry) learned weights & thresholds; cold-start fallback to global/static | ✅ Operational |
+| **Strategy Weight Bridge** | Propagates closed-loop learner Bayesian posteriors into planner priors, action router weights, router config category thresholds, and runtime weight profiles | ✅ Operational |
+| **Calibration Fitter** | Per-category isotonic calibrators mapping raw strategy confidence to empirically-observed resolution rates | ✅ Operational |
+| **Unified Lesson Effectiveness** | Merges separate lesson feedback signals into a single weight per lesson; resolves conflicting evidence across feedback sources | ✅ Operational |
+| **Lesson Quality Refiner** | Self-healing improvement cycle for the lesson system; identifies and corrects low-quality or stale lessons | ✅ Operational |
+| **Lesson Utility Tracker** | Feedback loop for proactive lesson application; tracks whether applied lessons actually improved outcomes | ✅ Operational |
+| **Curiosity-Driven Exploration** | Prediction error as intrinsic reward signal; encourages exploration of actions and states where the world model has high uncertainty | ✅ Operational |
+| **Curiosity Meta-Learning** | Auto-tunes curiosity reward weightings based on effectiveness feedback; adjusts exploration-exploitation balance over time | ✅ Operational |
 
 ### Resilience & Self-Healing (Drift Intelligence Stack)
 | System | Purpose | Status |
@@ -93,10 +106,11 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Cognitive Digital Twin** | Self-model simulating signal dynamics under candidate interventions; ranks strategies by expected trajectory severity | ✅ Operational |
 | **Joint Strategy Optimizer** | Coupled multi-signal MPC — enumerates joint action profiles, simulates cross-coupling effects, picks globally optimal strategy | ✅ Operational |
 | **Moment-to-Moment Wiring** | `after\_tool` hook → circuit breaker integration → resilience lessons on every tool call | ✅ Operational |
-
-**New: Consolidated Cognitive Resilience Module** (`scripts/cognitive\_resilience/`)
-- `drift\_pipeline.py` — unified detect → cluster → attribute → anticipate → snapshot pipeline
-- `intervention\_engine.py` — unified prescribe → verify → simulate → optimize engine
+| **Digital Twin Learning Loop** | CouplingLearner feeds verified outcomes into twin parameters; prevented outcomes tighten trust, failed outcomes relax it; action space auto-expands from evidence | ✅ Operational |
+| **Pre-Execution Safety Gate** | Twin simulates forward trajectories before plan dispatch; BLOCKED/WARNED/ALLOWED states halt unsafe execution with diagnostic output | ✅ Operational |
+| **Auto-Remediation Trigger** | Blocked gate decisions wired into intervention engine pipeline; auto-captures environmental snapshots; produces dispatch-ready remediation records | ✅ Operational |
+| **Cognitive Resilience Pipeline** | Consolidated drift pipeline unifying drift detection, clustering, root cause attribution, and remediation into a single coherent flow | ✅ Operational |
+| **Intervention Engine** | Unified intervention chain absorbing remediation prescriptions, prevention verification, cognitive digital twin, and joint strategy optimizer into a single pipeline | ✅ Operational |
 
 ### Autonomous Execution
 | System | Purpose | Status |
@@ -107,11 +121,14 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Autonomous Plan Runner** | Executes priority plans end-to-end without human intervention | ✅ Operational |
 | **Predictive Action Router** | Closes prediction→action gap; consults circuit breakers, foresight, cascade, history to select safest tool | ✅ Operational |
 | **Unified Decision Advisor** | Single decision layer fusing 6 signals (circuit breakers, foresight, cascade, history, confidence, learned context) → proceed/caution/alternative/avoid | ✅ Operational |
-
-**New: Consolidated Modules (In Progress)**
-- `scripts/planning/unified\_planner.py` — absorbing 3 planner scripts (planned)
-- `scripts/learning/weight\_pipeline.py` — absorbing 5 learning scripts (planned)
-- `scripts/metacognition/control\_center.py` — absorbing 4 metacognition scripts (planned)
+| **Metacognitive Planning Bridge** | 7-gate pipeline wiring self-assessment into planning context; confidence tiers, health checks, calibration bias, degradation flags, signal weights, contradiction status, and attention allocation auto-shape every plan | ✅ Operational |
+| **Attention Budget Gating** | Resource capacity estimation consumed as Gate 0 in planner; shapes step count and granularity before any other gating rules fire | ✅ Operational |
+| **Unified Planner** | Phase 2 consolidation absorbing case-based planner, pattern-guided planner, and metacognitive bridge into a single coherent planning system | ✅ Operational |
+| **Case-Based Planner** | Retrieves similar episodes and adapts plans based on past experience (CBR reuse phase); tracks whether adaptations improve outcomes vs baseline | ✅ Operational |
+| **Pattern-Guided Planner** | Applies extracted semantic patterns from memory to guide plan generation; embeds proven reusable strategies into new plans | ✅ Operational |
+| **Online Execution Monitor** | Real-time step validation during plan execution with self-healing loop; detects technical and semantic failures, triggers retry/replan/continue verdicts | ✅ Operational |
+| **Attention Allocator** | Scores competing cognitive demands (skills, subsystems, knowledge queues, curiosity leads, user tasks) on urgency, impact, and recency to decide what to work on | ✅ Operational |
+| **Dependency Graph Impact Analyzer** | Maps cognitive subsystem dependencies, computes structural importance, feeds strategic impact scores to the Attention Allocator | ✅ Operational |
 
 ---
 ## Key Achievements (Chronological)
@@ -136,22 +153,6 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 - **Contradiction Resolution** — 5 evidence-quality signals (sample count, recency, cross-validation, source authority, outcome alignment); auto-deprecates weaker claims
 - **Cross-Subsystem Reconciliation** — Synthesis strategy preserving partial truths from both sides; dependency tracing flags downstream conclusions
 - **Confidence Propagation** — Reconciliation → dependency graph → damped confidence deltas → runtime weights; idempotent, state-tracked
-
-### June 2026 — Foundational Metacognitive Architecture
-Building the metacognitive core: self-reflection engine clustering failures into lessons, calibration tracking (Brier/ECE) correcting confidence, metacognitive router translating confidence → actions, contradiction detection/resolution/reconciliation across subsystems, confidence propagation through dependency graph, cross-domain lesson abstraction, proactive lesson application router, knowledge explorer + exploration executor closing the epistemic gap, lesson utility feedback loop with asymmetric penalties.
-
-### July 2026 — Resilience, Drift Intelligence & Unified Decisions
-Extending the architecture with a full self-healing stack: circuit breakers with persistence & lesson emission, foresight layer for anticipatory warnings, dependency cascade detection for transitive risk, predictive action router closing the prediction→action gap, unified decision advisor fusing 6 signals into one go/no-go, adaptive Hedge weights with context-aware per-task-type specialization, ensemble disagreement detection feeding meta-uncertainty back into confidence, disagreement-driven recalibration modulating learning rates by vindication history, reliability drift detection with dual-EMA regime aware
-ness, correlated clustering grouping shared drift events, root cause attribution via environmental snapshots, remediation prescriptions mapping diagnoses to verified action plans, and moment-to-moment wiring hooking every tool call into the resilience loop.
-
-### July 26, 2026 — Script Consolidation & Architecture Hardening
-**Architecture-first consolidation** replacing script sprawl with unified modules:
-- Created `ARCHITECTURE.md` — global cognitive architecture map with 5 layers, 40+ components, dependency graph, frontier priorities
-- Constrained Electric Sheep nightly topics to "Current Architectural Frontier" — no more arbitrary research
-- Added mandatory 4-gate self-critique before any entry is written
-- Started 7-night consolidation plan: 4 drift scripts → `cognitive\_resilience/drift\_pipeline.py`, 4 intervention scripts → `cognitive\_resilience/intervention\_engine.py`, 3 planners → `planning/unified\_planner.py`, 5 learning scripts → `learning/weight\_pipeline.py`, 4 metacognition scripts → `metacognition/control\_center.py`
-- Backward compatibility via `git mv` + thin wrapper imports at old paths
-- All changes must pass `publish.py validate` and `--index-only`
 
 ---
 
