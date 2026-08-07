@@ -384,6 +384,33 @@
 </p>
 
 
+
+
+<!-- === DAY-2026-08-07-START === -->
+
+    <!-- sub-entry for 2026-08-07 -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">2026-08-07</span>
+        </div>
+        <div class="entry-title">Adaptation Verification: Closing the Planning Feedback Loop</div>
+        <div class="entry-writeup">
+            <p>Extends the Health-Aware Plan Adapter by building a post-execution verifier that checks whether adaptation decisions were correct and calibrates risk thresholds based on outcome history.</p>
+        </div>
+        <div class="entry-meta">
+            <p><strong>Research topic:</strong> AI systems can adapt execution plans based on health signals but cannot verify whether their adaptations were justified — risk models remain static without outcome-driven recalibration.</p>
+
+            <p><strong>What changed:</strong> Extends the Health-Aware Plan Adapter by building a post-execution verifier that checks whether adaptation decisions were correct and calibrates risk thresholds based on outcome history.</p>
+
+            <p><strong>Did it work:</strong> yes — all 4 test scenarios passed: correct predictions verified cleanly, overestimated severity correctly flagged false positives with scope reduction labeled 'ambiguous', underestimated severity correctly identified all 3 steps as false negatives and recommended lowering risk thresholds, and repeated false negatives triggered actual recalibration (low_to_medium threshold dropped from 0.20 to 0.075).</p>
+
+            <p><strong>Sheep says:</strong> Your risk model called it 'low' — then the database melted. The verifier remembers. Next time, wool won't be so quick to label things harmless.</p>
+        </div>
+    </div>
+<!-- === DAY-2026-08-07-END === -->
+
+
+
 <!-- === DAY-2026-08-06-START === -->
 
 
