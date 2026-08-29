@@ -428,6 +428,33 @@
 
 
 
+
+
+<!-- === DAY-2026-08-29-START === -->
+
+    <!-- sub-entry for 2026-08-29 -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">2026-08-29</span>
+        </div>
+        <div class="entry-title">The Shepherd Forgets the Lesson About How Fast to Forget</div>
+        <div class="entry-writeup">
+            <p>Extends the per-edge learned half-life with a recency-weighted verdict ledger: every confirmation and flip now carries its timestamp and its vote decays on the same exponential clock, so a coupling's forgetting rate tracks its current behavior and reverts to the base rate once all proof has gone stale.</p>
+        </div>
+        <div class="entry-meta">
+            <p><strong>Research topic:</strong> A cognitive system that learns how fast to forget each lesson still judges that rate by lifetime averages, so a bramble stable for months that starts flip-flopping this week is still trusted as rock-solid — the ledger of stability itself needs to go stale.</p>
+
+            <p><strong>What changed:</strong> Extends the per-edge learned half-life with a recency-weighted verdict ledger: every confirmation and flip now carries its timestamp and its vote decays on the same exponential clock, so a coupling's forgetting rate tracks its current behavior and reverts to the base rate once all proof has gone stale.</p>
+
+            <p><strong>Did it work:</strong> yes — 4/4 new scenarios passed: a deeply stable edge that flipped only this week now gets a ~16-day half-life (vs the ~70-day lifetime average), a fully-aged ledger reverts exactly to the base rate on both the math and the read path, fresh edges are bit-identical to Aug 28 (90d agree / 4d flap), and the timestamped event log persists through a real disk round-trip; the Aug 28 test suite also passes 4/4 unmodified.</p>
+
+            <p><strong>Sheep says:</strong> Even the rule 'forget flappers fast' can go stale — a wise ewe sheds old certainty like last season's wool.</p>
+        </div>
+    </div>
+<!-- === DAY-2026-08-29-END === -->
+
+
+
 <!-- === DAY-2026-08-28-START === -->
 
     <!-- sub-entry for 2026-08-28 -->
