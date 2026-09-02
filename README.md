@@ -86,8 +86,14 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Unified Lesson Effectiveness** | Merges separate lesson feedback signals into a single weight per lesson; resolves conflicting evidence across feedback sources | ✅ Operational |
 | **Lesson Quality Refiner** | Self-healing improvement cycle for the lesson system; identifies and corrects low-quality or stale lessons | ✅ Operational |
 | **Lesson Utility Tracker** | Feedback loop for proactive lesson application; tracks whether applied lessons actually improved outcomes | ✅ Operational |
+| **Cross-Domain Lesson Abstraction** | Generalizes domain-specific lessons into reusable cross-domain patterns, addressing the rigidity of single-domain lesson systems | ✅ Operational |
 | **Curiosity-Driven Exploration** | Prediction error as intrinsic reward signal; encourages exploration of actions and states where the world model has high uncertainty | ✅ Operational |
 | **Curiosity Meta-Learning** | Auto-tunes curiosity reward weightings based on effectiveness feedback; adjusts exploration-exploitation balance over time | ✅ Operational |
+| **Curiosity–Lesson-Utility Bridge** | Wires Layer 5 lesson utility into the Layer 1 curiosity weight so proven areas dampen exploration and failing areas raise it — evidence-gated, merge-only, bounded | ✅ Operational |
+| **Adaptive Confidence Thresholds & Meta-Learning Stack** | Adaptive confidence thresholds with TD credit assignment, per-threshold effectiveness tracking, a meta-learning optimizer, continuous meta-learning integration, and adaptive step-size meta-learning — closed loop from prediction-accuracy feedback into self-tuning thresholds | ✅ Operational |
+| **Adaptive Curiosity Stack** | Curiosity-driven exploration with adaptive curiosity weight tuning, adaptive step-size meta-learning, and meta-learning integration — the exploration engine the curiosity–lesson-utility bridge later closes the loop on | ✅ Operational |
+| **World-Model + Planner Closed Loop** | World model adjusts confidence scores from execution mismatches and can flip predictions when consistently wrong — closes the loop from planner execution back into the world model | ✅ Operational |
+| **Persistent Weight Profiles** | Learned recalibrations survive restarts via durable JSON config — the persistence primitive every later learning layer inherits | ✅ Operational |
 
 ### Resilience & Self-Healing (Drift Intelligence Stack)
 | System | Purpose | Status |
@@ -111,6 +117,18 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Auto-Remediation Trigger** | Blocked gate decisions wired into intervention engine pipeline; auto-captures environmental snapshots; produces dispatch-ready remediation records | ✅ Operational |
 | **Cognitive Resilience Pipeline** | Consolidated drift pipeline unifying drift detection, clustering, root cause attribution, and remediation into a single coherent flow | ✅ Operational |
 | **Intervention Engine** | Unified intervention chain absorbing remediation prescriptions, prevention verification, cognitive digital twin, and joint strategy optimizer into a single pipeline | ✅ Operational |
+| **Twin Coupling Learner** | Verified intervention outcomes feed the cognitive digital twin's coupling parameters; per-action dynamics, effectiveness priors, and cross-signal spillover multipliers learn from evidence (auto-expands to novel actions) | ✅ Operational |
+| **Twin Gate (calibrated pre-execution simulation)** | Fully-calibrated cognitive twin gates plan execution with BLOCKED/WARNED/ALLOWED states; thresholds self-recalibrate from verified false-positive / false-negative outcomes | ✅ Operational |
+| **Deferred Re-Evaluation** | Blocked steps captured into a persistent queue and re-evaluated when system health recovers; the gate becomes an adaptive checkpoint instead of a one-way filter | ✅ Operational |
+| **Environmental Snapshot Remediation** | Block-time environmental snapshots trigger targeted auto-remediation when conditions shift between block and re-evaluation; closed-loop verification tracks whether the env-shift prescription resolved the blocked condition | ✅ Operational |
+| **Consequence-Aware Gating** | Risk-gates every auto-remediation action through blast radius, false-positive cost, irreversibility, and preconditions; high-risk actions require approval, low-risk actions proceed automatically | ✅ Operational |
+| **Preventive Prescription & Verification Loop** | Closes the loop from drift-anticipation forecast → execution-ready preventive prescription → outcome verification that learns whether the preventive action actually prevented the drift | ✅ Operational |
+| **Coupling-Aware Prevention** | Prescriber re-ranks candidate actions by learned cross-signal harm onto other currently-at-risk signals; closes the resolution-vs-coupling trade-off | ✅ Operational |
+| **Observed Spillover Learning** | Coupling model calibrates from per-signal forecast verdicts rather than a uniform proxy multiplier; trade-offs discovered vs benefits confirmed vs neutral evidence handled separately | ✅ Operational |
+| **Coupling Edge Caution (per-edge learned caution)** | Cross-signal caution weight becomes a per-source-to-target edge weight that updates by evidence strength and decays toward neutral over learned half-lives unless re-confirmed | ✅ Operational |
+| **Per-Edge Forgetting & Re-Verification** | Per-edge half-life learned from each coupling's own confirmation/flip history → recency-weighted verdict ledger → persisted re-verification calendar; automated sweep consumes due edges, budgeted by expected cost of stale lessons | ✅ Operational |
+| **Remediation Effectiveness Learning (UCB)** | Verified outcomes update a per-action effectiveness ledger that re-ranks future prescriptions; UCB exploration bonus plus a learned, self-tuning exploration appetite break the cold-start lock and re-balance explore/exploit per regime | ✅ Operational |
+| **Cognitive Health Monitor (proactive)** | Proactive system-wide health check that auto-triggers the full remediation pipeline before plan execution begins — diagnosis plus treatment, not just dashboards | ✅ Operational |
 
 ### Autonomous Execution
 | System | Purpose | Status |
@@ -129,6 +147,11 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Online Execution Monitor** | Real-time step validation during plan execution with self-healing loop; detects technical and semantic failures, triggers retry/replan/continue verdicts | ✅ Operational |
 | **Attention Allocator** | Scores competing cognitive demands (skills, subsystems, knowledge queues, curiosity leads, user tasks) on urgency, impact, and recency to decide what to work on | ✅ Operational |
 | **Dependency Graph Impact Analyzer** | Maps cognitive subsystem dependencies, computes structural importance, feeds strategic impact scores to the Attention Allocator | ✅ Operational |
+| **Health-Aware Plan Adapter** | Twin-projected health modifies step ordering, drops non-critical steps during predicted critical degradation, and risk-annotates every step before dispatch | ✅ Operational |
+| **Adaptation Verifier & Live Recalibration** | Post-execution verifier checks whether adaptation decisions were correct and recalibrates risk thresholds; the planner dynamically consumes the recalibrated thresholds on the next adaptation cycle | ✅ Operational |
+| **Metacognitive Bridge (Layer 2 → Layer 4)** | Six- to seven-gate pipeline wiring self-assessment, calibration, health, and contradiction status into the planner's context injection; attention budget added as Gate 0 | ✅ Operational |
+| **Strategic Priority Router** | Synthesizes reflection, calibration gaps, strategy profiles, and knowledge open questions into a ranked priority list that closes the loop between introspection and action | ✅ Operational |
+| **Cross-System Feedback Loops (initial wiring)** | First systematic wiring of isolated cognitive modules to exchange data — the architectural primitive every later cross-subsystem loop inherits | ✅ Operational |
 
 ---
 ## Key Achievements (Chronological)
