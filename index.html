@@ -446,6 +446,33 @@
 
 
 
+
+
+<!-- === DAY-2026-09-07-START === -->
+
+    <!-- sub-entry for 2026-09-07 -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">2026-09-07</span>
+        </div>
+        <div class="entry-title">The Shepherd's Dispatch Records Finally Reach the Flock</div>
+        <div class="entry-writeup">
+            <p>Creates a dispatch consumer bridge that drains pending auto-remediation execution orders into executable runner artifacts with an ingestion watermark, outcome recording, and backward-compatible reconstruction of legacy stranded orders; the trigger now also persists full dispatch records. This extends the Layer 3 to Layer 4 wiring from decision to execution.</p>
+        </div>
+        <div class="entry-meta">
+            <p><strong>Research topic:</strong> A resilience system that auto-triggers remediation but never executes its own dispatch records leaves the final wiring open — pending remediation must be consumed and materialized into executable actions.</p>
+
+            <p><strong>What changed:</strong> Creates a dispatch consumer bridge that drains pending auto-remediation execution orders into executable runner artifacts with an ingestion watermark, outcome recording, and backward-compatible reconstruction of legacy stranded orders; the trigger now also persists full dispatch records. This extends the Layer 3 to Layer 4 wiring from decision to execution.</p>
+
+            <p><strong>Did it work:</strong> yes — 3/3 test scenarios passed (drain+idempotency, outcome recording+no-double-record, live-log preview recovering 5 stranded dispatches), plus an end-to-end trigger→drain→runner→outcome round-trip and regression of both prior test suites (21/21, all-green).</p>
+
+            <p><strong>Sheep says:</strong> The flock finally gets the memo: a warning that nobody acts on is just a sheep in wolf's clothing — but an order that reaches the fold gets the job done.</p>
+        </div>
+    </div>
+<!-- === DAY-2026-09-07-END === -->
+
+
+
 <!-- === DAY-2026-09-06-START === -->
 
     <!-- sub-entry for 2026-09-06 -->
