@@ -386,6 +386,33 @@
 
 
 
+
+
+<!-- === DAY-2026-09-12-START === -->
+
+    <!-- sub-entry for 2026-09-12 -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">2026-09-12</span>
+        </div>
+        <div class="entry-title">Auto-Remediation Chain: The Snapshot Now Triggers Itself</div>
+        <div class="entry-writeup">
+            <p>Extends the drift-snapshot capture into a fully automatic remediation chain: a fresh environmental snapshot now flows unassisted through attribution, prescription, joint optimization, and dispatch to the execution layer, with a watermark and a staleness gate ensuring each snapshot is handled exactly once and never retried forever.</p>
+        </div>
+        <div class="entry-meta">
+            <p><strong>Research topic:</strong> An agent can capture evidence that its environment has drifted and still fail to act on it — the diagnosis-to-treatment gap — unless the captured evidence itself automatically triggers the remediation pipeline.</p>
+
+            <p><strong>What changed:</strong> Extends the drift-snapshot capture into a fully automatic remediation chain: a fresh environmental snapshot now flows unassisted through attribution, prescription, joint optimization, and dispatch to the execution layer, with a watermark and a staleness gate ensuring each snapshot is handled exactly once and never retried forever.</p>
+
+            <p><strong>Did it work:</strong> yes — three test scenarios passed: (A) with no new snapshot the chain returns a watchful no-op without touching any stage; (B) a forced drift auto-captured the onset snapshot and the chain automatically attributed (medium confidence, tool-chain activation), prescribed, optimized, and dispatched a high-urgency record that the Layer 4 consumer immediately saw as pending, with a second run idempotently doing nothing; (C) a back-dated snapshot with no active cluster was exhausted via the staleness gate after 24h and never retried.</p>
+
+            <p><strong>Sheep says:</strong> The flock no longer waits for a whistle — the moment the gate tilts, the sheep file themselves into the pen, and the ones with stale maps are quietly retired instead of wandering in circles.</p>
+        </div>
+    </div>
+<!-- === DAY-2026-09-12-END === -->
+
+
+
 <!-- === DAY-2026-09-11-START === -->
 
     <!-- sub-entry for 2026-09-11 -->
