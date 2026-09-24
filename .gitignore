@@ -1,6 +1,9 @@
-# Electric Sheep public repo — ONLY index.html and CNAME are public
-# Everything else is local-only. Add nothing to this repo.
+# Electric Sheep public repo — ONLY these files are public
+# Everything else in this workspace is local-only. Add nothing else.
 /*
 !/index.html
 !/CNAME
 !/.gitignore
+!/.nojekyll
+!/.github
+!/.github/**
