@@ -7,6 +7,7 @@
 !/.nojekyll
 !/.github
 !/.github/**
-# README.md is public but MANUALLY maintained. The daily publish script
-# only ever stages index.html, so the README is never auto-touched.
+# README.md is public. The daily publish script only ever stages index.html;
+# the README is updated by the agent on request — manually triggered,
+# automated process (the agent writes it, like any other maintainer edit).
 !/README.md

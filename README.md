@@ -55,6 +55,9 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Memory Consolidation** | Automated episodic-to-semantic promotion; validates extracted patterns against historical data and promotes high-confidence patterns to the knowledge base | ✅ Operational |
 | **Knowledge Maintenance** | Cognitive health scanning for knowledge bases; detects contradictions, tracks knowledge freshness, identifies coverage gaps | ✅ Operational |
 | **Dream Deduplicator** | Removes placeholder and duplicate entries from dream diary after memory promotion events | ✅ Operational |
+| **Verdict Digest (Ledger of Ledgers)** | Reconciles multiple verified-outcome books into a single decayed meta-verdict with named verdicts, persisted as dated history | ✅ Operational |
+| **Verdict-to-Episode Bridge** | Converts verified learning events (coupling, gate, feedback) into retrievable episodic records with evidence-scaled importance | ✅ Operational |
+| **Outcome-Calibrated Review Cadence** | Verified runtime outcomes with temporal decay stretch or pull forward each knowledge note's review schedule | ✅ Operational |
 
 ### Metacognitive Layer
 | System | Purpose | Status |
@@ -68,6 +71,9 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Auto-Injection Bridge** | Feeds Learning Registry insights to Planner & Router before decisions | ✅ Operational |
 | **Metacognitive Control Center** | Phase 4 consolidation unifying router, calibration tracker, effectiveness logger, and self-assessment into a single Layer 2 module | ✅ Operational |
 | **Cognitive Middleware** | Per-turn cognitive cycle: pre-turn assessment (metacognition, world model, working memory, episodic retrieval, pattern matching) and post-turn learning (outcome tracking, closed-loop learning, knowledge capture, memory consolidation) | ✅ Operational |
+| **Router Outcome Learning** | Consumes learned routing adjustments (confidence bias, verification pressure, caution) from past plan verdicts, closing the metacognition → planning loop | ✅ Operational |
+| **Meta-Verdict Voting** | The cross-cutting meta-verdict votes in the router as a decayed, honesty-gated modifier | ✅ Operational |
+| **Gate Rent Accounting** | Every metacognitive gate earns a decayed rent tally from verified step-level margins, carried into the next plan | ✅ Operational |
 
 ### Learning & Adaptation
 | System | Purpose | Status |
@@ -88,6 +94,10 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Lesson Utility Tracker** | Feedback loop for proactive lesson application; tracks whether applied lessons actually improved outcomes | ✅ Operational |
 | **Curiosity-Driven Exploration** | Prediction error as intrinsic reward signal; encourages exploration of actions and states where the world model has high uncertainty | ✅ Operational |
 | **Curiosity Meta-Learning** | Auto-tunes curiosity reward weightings based on effectiveness feedback; adjusts exploration-exploitation balance over time | ✅ Operational |
+| **Evidence-Scaled Twin Learning** | Digital twin coupling parameters update from verified outcomes with evidence-strength scaling and recency decay | ✅ Operational |
+| **Per-Edge Coupling Caution** | Learned per source → target caution weights, recalibrated by evidence strength and faded by recency | ✅ Operational |
+| **Learned Forgetting Rates** | Per-coupling half-lives learned from each coupling's own confirmation-and-flip history | ✅ Operational |
+| **Plan-Shape Memory** | Executed plans stored as shape signatures under their cognitive condition and retrieved by condition match | ✅ Operational |
 
 ### Resilience & Self-Healing (Drift Intelligence Stack)
 | System | Purpose | Status |
@@ -111,6 +121,12 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Auto-Remediation Trigger** | Blocked gate decisions wired into intervention engine pipeline; auto-captures environmental snapshots; produces dispatch-ready remediation records | ✅ Operational |
 | **Cognitive Resilience Pipeline** | Consolidated drift pipeline unifying drift detection, clustering, root cause attribution, and remediation into a single coherent flow | ✅ Operational |
 | **Intervention Engine** | Unified intervention chain absorbing remediation prescriptions, prevention verification, cognitive digital twin, and joint strategy optimizer into a single pipeline | ✅ Operational |
+| **Preventive Prescriptions** | Anticipatory remedies generated from drift forecasts, ranked by proven effectiveness | ✅ Operational |
+| **Preventive Verification** | Learns whether each preventive action actually prevented the anticipated drift | ✅ Operational |
+| **Coupling-Aware Prevention** | Re-ranks remedies by learned cross-signal harm onto other at-risk signals | ✅ Operational |
+| **Re-Verification Calendar & Sweep** | Persisted per-coupling re-check schedule; a budgeted sweep re-earns stale lessons automatically | ✅ Operational |
+| **Auto-Snapshot Remediation Chain** | Confirmed drift auto-captures an environmental snapshot that flows unassisted through attribution → prescription → optimization → dispatch | ✅ Operational |
+| **Review Shelf** | Gate-held-back fixes persist with full evidence; approved reviews flow to execution; the shelf learns which gates lose value | ✅ Operational |
 
 ### Autonomous Execution
 | System | Purpose | Status |
@@ -129,6 +145,9 @@ The **Unified Cognitive Pipeline** — the main decision loop that orchestrates 
 | **Online Execution Monitor** | Real-time step validation during plan execution with self-healing loop; detects technical and semantic failures, triggers retry/replan/continue verdicts | ✅ Operational |
 | **Attention Allocator** | Scores competing cognitive demands (skills, subsystems, knowledge queues, curiosity leads, user tasks) on urgency, impact, and recency to decide what to work on | ✅ Operational |
 | **Dependency Graph Impact Analyzer** | Maps cognitive subsystem dependencies, computes structural importance, feeds strategic impact scores to the Attention Allocator | ✅ Operational |
+| **World-Model Dry-Run Gate** | Plan runner simulates every step through the world model before executing, feeding outcomes back to a per-operation drift monitor | ✅ Operational |
+| **Dispatch Consumer Bridge** | Drains pending auto-remediation orders into executable runner artifacts with outcome recording | ✅ Operational |
+| **Attention-Shaped Decomposition** | Attention allocator priorities drive plan structure, not just step ordering | ✅ Operational |
 
 ---
 ## Key Achievements (Chronological)
@@ -169,6 +188,18 @@ Bridging self-awareness to action: metacognitive planning bridge wiring a 7-gate
 
 ### Late July / August 2026 — Digital Twin: Learning, Gating & Auto-Remediation
 Closing the digital twin loop across three generations: CouplingLearner feeding verified intervention outcomes back into the twin's coupling parameters so the model learns from evidence (prevented outcomes tighten trust, failed outcomes relax it); pre-execution simulation gate where the twin simulates forward trajectories and blocks unsafe plan dispatch with BLOCKED/WARNED/ALLOWED states; auto-remediation trigger wiring blocked gate decisions into the intervention engine for automatic recovery with environmental snapshots; and twin gate guardian integrating the learned twin as a persistent pre-execution safety gate with full audit logging — closing the diagnosis-to-treatment gap so the system doesn't just detect unsafe states but actively remediates them.
+
+### August 2026 — Preventive Resilience & Coupling-Aware Repair
+Extending self-healing from reactive to anticipatory: preventive prescriptions generated from drift forecasts and verified against whether the predicted drift actually arrived; cross-signal coupling harms learned per source-to-target edge so remedies are re-ranked by their side effects; per-edge caution weights that scale by evidence strength and fade with recency; forgetting rates learned per coupling from its own confirmation-and-flip history; and a persisted re-verification calendar that reschedules stale lessons, budgeted by the cost of leaving them unlearned — closing the loop from knowing to doing.
+
+### September 2026 — The Outcome-Receipt Discipline
+Turning every verified outcome into a spendable receipt: plan outcomes converted into bounded routing adjustments that shape the next plan (verification pressure, caution, confidence bias); attention and appetite books that price each category's work by whether the attention actually paid; metacognitive gates billed for the rent they earn from verified step margins; the world model's predictions calibrated by verified false successes and false failures; knowledge-note review cadences stretched or pulled by outcome receipts; and a bridge that stores what each learned outcome taught as retrievable memory.
+
+### Late September 2026 — The Ledger of Ledgers
+Unifying the outcome accounting: several verified-outcome books reconciled into a single decayed meta-verdict with named verdicts and dated history, promoted from prototype to durable production infrastructure; a knowledge-layer consumer that materializes each new verdict as an indexed note; and the meta-verdict itself voting in the router as a decayed, honesty-gated modifier — so the system's cross-cutting self-assessment is consumed, not merely computed.
+
+### Late September / October 2026 — The Return Edges Close
+Closing the loops between layers: the router consuming learned bias, verification pressure, and caution from past plan verdicts; the digital twin learning its coupling matrix from verified remediation outcomes and proving — by measuring its real numbers, not by assertion — that its consumers actually read the learned parameters; verified verdicts settling into retrievable episodic memory; and the planner's decomposition steered by a bounded, evidence-gated rent that keeps an audit trail proving the learned guidance reached a real plan.
 
 ---
 
