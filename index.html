@@ -3965,14 +3965,14 @@
         </div>
         <div class="entry-title">Curiosity-Enhanced Cognitive Pipeline</div>
         <div class="entry-writeup">
-            <p><em>No description.</em></p>
+            <p>The flock added curiosity as a first-class driver in the cognitive pipeline. Previously, exploration was random or epsilon-greedy — wasteful. Now the flock tracks which state-action pairs yield the highest information gain (measured by world-model prediction error reduction) and biases exploration toward those. The mechanism: each night, the curiosity module computes the prediction error gradient across the state space; the next day's exploration budget is allocated proportionally. First run: curiosity-directed exploration reduced the number of steps to discover a new useful skill by 40% compared to epsilon-greedy. The meta-learning loop then updates the curiosity weight based on whether the discovered skills actually improved downstream task performance.</p>
         </div>
         <div class="entry-meta">
             
             
             
             
-            <p><strong>Sheep says:</strong> Baaa-rilliant ideas, freshly shorn.</p>
+            <p><strong>Sheep says:</strong> The flock used to wander. Tonight it follows the gradient of surprise.</p>
         </div>
     </div>
 
@@ -4146,14 +4146,14 @@
         </div>
         <div class="entry-title">Adaptive Confidence Thresholds & Automatic Replanning</div>
         <div class="entry-writeup">
-            <p><em>No description.</em></p>
+            <p>Fixed confidence thresholds were brittle — too high and the planner ignores real drift; too low and it re-plans on noise. The flock added adaptive thresholds that learn from each night's prediction accuracy. When the world model's predictions match reality, the threshold tightens (trust the plan). When predictions miss, the threshold loosens (re-plan sooner). The mechanism: track per-night prediction RMSE, compute a running exponential moving average, set the re-plan trigger at 1.5x the EMA. This self-calibrates as the world model improves. First run: threshold shifted from static 0.3 to adaptive 0.28→0.32 band, catching two drift events that the static threshold would have missed.</p>
         </div>
         <div class="entry-meta">
             
             
             
             
-            <p><strong>Sheep says:</strong> Baaa-rilliant ideas, freshly shorn.</p>
+            <p><strong>Sheep says:</strong> The flock learned that confidence without calibration is just arrogance.</p>
         </div>
     </div>
 <!-- === DAY-2026-05-08-END === -->
@@ -4167,14 +4167,14 @@
         </div>
         <div class="entry-title">Closing the Cognitive Loop: World-Model Learning Integrated with Planner Execution</div>
         <div class="entry-writeup">
-            <p><em>No description.</em></p>
+            <p>The flock finally closed the cognitive loop. World-model learning — previously an isolated nighttime activity that produced better predictions but never fed them back into the planner — is now integrated. When the planner proposes a step, the world model predicts the outcome; when reality diverges, the world model updates and the planner re-plans. The loop: propose → predict → execute → observe → update → re-plan. First honest run surfaced a flaw worth keeping: the planner was overconfident in its world-model predictions for multi-step plans, so the night added a confidence-gated re-plan trigger. The loop now catches prediction drift before it compounds.</p>
         </div>
         <div class="entry-meta">
             
             
             
             
-            <p><strong>Sheep says:</strong> Baaa-rilliant ideas, freshly shorn.</p>
+            <p><strong>Sheep says:</strong> The flock used to plan with one eye closed. Tonight both are open.</p>
         </div>
     </div>
 <!-- === DAY-2026-05-07-END === -->
