@@ -67,16 +67,16 @@ The knowledge base actively scans for contradictions between subsystems. When tw
 The system thinks about its own thinking. Before every decision, it runs a pre-turn assessment cycle:
 
 ```
-                  +-------------+     +-------------+     +-------------+
-                  | Metacognitive|    |    World     |    |  Working    |
-                  | Self-Assess  |--->|    Model     |--->|  Memory     |
-                  +-------------+     +-------------+     +-------------+
+                  +---------------+   +-----------+   +-----------+
+                  | Metacognitive  |   |   World   |   |  Working  |
+                  | Self-Assessment|->|   Model   |->|  Memory   |
+                  +---------------+   +-----------+   +-----------+
                           |                                       |
                           v                                       v
-                  +-------------+     +-------------+     +-------------+
-                  |  Episodic    |    |   Pattern    |    |  Decision   |
-                  |  Retrieval   |--->|   Matching   |--->|  Shaping    |
-                  +-------------+     +-------------+     +-------------+
+                  +-----------+   +-----------+   +-----------+
+                  | Episodic   |   |  Pattern  |   | Decision  |
+                  | Retrieval  |->|  Matching |->|  Shaping  |
+                  +-----------+   +-----------+   +-----------+
 ```
 
 After every action, a post-turn learning cycle captures outcomes, updates weights, logs lessons, and consolidates memory. The metacognitive layer calibrates confidence using Brier scores and ECE, detects when the system is over- or under-confident, and adjusts future recommendations accordingly.
