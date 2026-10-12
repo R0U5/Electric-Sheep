@@ -155,33 +155,37 @@ The system does not wait for humans to act. It plans, dispatches, and reconciles
 
 ## Measured Results
 
-Every number below comes from the system's own logs, outcome trackers, and knowledge base -- not from synthetic benchmarks.
+Every metric below is drawn from the system's own logs, outcome trackers, and knowledge base -- not from synthetic benchmarks or external datasets. They represent what an autonomous agent measured about its own cognition while running on real workloads.
 
-### Calibration
+### Confidence Calibration
 
-The system's first retrospective (May 2026, 6 outcome records) found a **calibration error of 0.542** (severe) -- confidence scores did not track reality. The metacognitive layer was overconfident on debugging tasks (50% success rate) and underconfident on research tasks (67% success rate). The retrospective immediately surfaced a pattern the agent had not noticed: it was failing at things it was confident about.
+The system's first automated retrospective (May 2026, n=6 outcome records) measured an **expected calibration error (ECE) of 0.542** -- severe miscalibration between stated confidence and actual outcomes. The retrospective surfaced a blindspot the agent had not noticed: it was systematically overconfident on debugging tasks (50% success) and underconfident on research tasks (67% success).
 
-After wiring calibration tracking into the metacognitive router and feeding Brier scores back into confidence adjustment, subsequent pipeline runs showed **100% success rate with 0 prediction mismatches** on smoke-test plans (verified across 8+ runs, September--October 2026). The world-model dry-run gate now catches mismatches before execution, not after.
+After wiring Brier-score-based calibration into the metacognitive router and feeding verified outcomes back into confidence adjustment, subsequent pipeline runs converged to **0 prediction mismatches across 8+ consecutive runs** (September--October 2026), with the world-model dry-run gate catching residual mismatches pre-execution rather than post-mortem.
 
-### Closed-Loop Learning
+### Closed-Loop Behavioral Change
 
-The Adaptation Verifier recalibrated risk thresholds from 0.70 to 0.58 across 5 recalibration events. Before the verifier-to-adapter bridge was wired, those recalibrated thresholds sat unread -- the loop existed on paper but not in execution. After wiring the verifier state into the adapter's constructor and every `adapt_plan()` call, the same severity level (0.60) produced a concrete behavioral difference: default thresholds yielded "caution" with 0 dropped steps; learned thresholds yielded "reduce_scope" with 3 dropped steps. The system learned to be more cautious, and that caution changed what it actually did.
+The Adaptation Verifier recalibrated critical risk thresholds from 0.70 to 0.58 across 5 recalibration events. Before the verifier-to-adapter bridge was wired, those learned thresholds sat unread -- the feedback loop existed on paper but not in execution. After wiring the verifier state into the adapter on every `adapt_plan()` call, the same severity input (0.60) produced a **qualitatively different decision**: default thresholds yielded "caution" with 0 dropped steps; learned thresholds yielded "reduce_scope" with 3 dropped steps. The system's own learning changed its own behavior, not just its internal state.
 
-### Autonomous Execution Reliability
+### Second-Order Meta-Learning: Forgetting Rates
 
-Parallel cron-launched sub-agents replaced sequential execution with 5-second stagger intervals, yielding a **36x throughput improvement** over 30-second sequential dispatch. Exponential backoff retry (1s -> 2s -> 4s -> 30min + jitter) handles transient failures without human intervention. Full pipeline autonomy has been demonstrated: 5 dispatched steps completed end-to-end via cron-launched isolated sub-agents with no human in the loop.
+The system learns per-coupling forgetting rates from each coupling's own confirmation/flip history. A critical failure was identified: the history ledger itself was non-stationary-blind -- a coupling stable for 200 days that started flip-flopping in the last week was still judged rock-solid. After adding recency-weighted verdict decay (30-day half-life), the same edge's estimated half-life shifted from **70.2 days (lifetime average) to 16.4 days (recency-weighted)** -- a 4.3x correction in the estimated stability of a degrading coupling. This is second-order meta-learning: the system learned that its own learning rate estimates were stale.
 
-### Self-Healing
+### Non-Stationary Drift Detection
 
-The drift intelligence stack provides a **30% learning boost during detected drift periods** -- dual-timescale exponential moving averages detect when the environment has shifted and increase learning rates accordingly. Circuit breakers classify failures as transient, semantic, or impossible, with state that survives restarts -- preventing amnesia between sessions.
+Dual-timescale exponential moving averages track per-signal vindication rates. When the environment shifts, the fast EMA diverges from the slow EMA, triggering regime detection. During confirmed drift periods, the system increases learning rates by **30%** -- Bayesian weight updates accelerate to track the new regime faster, then relax when the fast/slow EMAs reconverge. The drift detector also groups temporally-correlated drift onsets into shared regime events with inferred causes, avoiding spurious per-signal responses to what is actually a single environmental shift.
 
-### Prediction Markets
+### Signal Fusion Architecture
 
-The prediction market subsystem runs 12 strategies with Hedge-style adaptive signal weights. CLV (Closing Line Value) was adopted as the primary performance metric over realized P&L because it is **variance-free and converges 10-100x faster**. A Bayesian gate with shrinkage quarantines low-sample strategies to shadow mode until they prove positive CLV -- preventing phantom edge from causing real losses. The LLM forecaster's Brier score was measured against the market baseline: the market beat the model on calibration, confirming that liquid political markets are sharp and that beating them requires structural advantages, not a better prompt.
+The Unified Decision Advisor fuses 6 independent predictive signals into a single action verdict (proceed / caution / alternative / avoid) with weighted scoring: foresight 30%, cascade 20%, confidence 20%, history 15%, learned context 15%. Circuit breakers provide an instant veto path that bypasses the full fusion when a hard failure is detected. Every decision is logged with its rationale for retrospective analysis. The signal weights are fixed in the current implementation -- adaptive weight learning is an open architectural question.
 
-### System Resilience Under Load
+### Prediction Market Calibration
 
-During a rate-limit storm (October 2026), the free-tier primary model hit 240 rate-limit responses in 24 hours, cascading into 1,689 total errors. The fix: remove the 8K-TPM bottleneck from fallback chains and convert 18 of 32 cron jobs from agent-turn payloads (which burn a full LLM bootstrap to relay an exit code) to model-free command payloads. This eliminated unnecessary model calls entirely for script-runner jobs -- zero tokens, zero rate-limit exposure, same functionality.
+The system runs 12 paper-trading strategies with Hedge-style multiplicative weight updates. **Closing Line Value (CLV)** was adopted as the primary performance metric over realized P&L because it is variance-free and converges **10-100x faster** than outcome-based profit metrics. A Bayesian gate with skeptical priors (mu_0=0, tau_0=0.03) quarantines low-sample strategies to shadow mode until they prove positive CLV, preventing phantom edge from causing real losses. An LLM forecaster was evaluated against the market baseline using Brier scores: **the market beat the model on calibration**, empirically confirming that liquid prediction markets are well-calibrated and that beating them requires structural advantages rather than a better prompt.
+
+### Outcome-Informed Routing
+
+Strategy success rates feed back into the action router in real time: strategies with >=75% success rate (n>=2) receive a +0.10 confidence boost; strategies with <50% success rate receive a -0.15 penalty with a warning flag. This creates a closed feedback loop where execution outcomes directly shape future routing decisions -- without model retraining, fine-tuning, or human intervention.
 
 ---
 
