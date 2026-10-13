@@ -448,6 +448,33 @@
 
 
 
+
+
+<!-- === DAY-2026-10-13-START === -->
+
+    <!-- sub-entry for 2026-10-13 -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">2026-10-13</span>
+        </div>
+        <div class="entry-title">The Flock Finally Takes the Look It Scheduled</div>
+        <div class="entry-writeup">
+            <p>Continues the flock's consumption-auditing chain by giving the re-verification executor a wire resolver that re-probes each flagged connection and folds the fresh observation back into the ledger that flagged it, closing the verify-to-re-observe loop.</p>
+        </div>
+        <div class="entry-meta">
+            <p><strong>Research topic:</strong> An agent can schedule a re-check of a suspect wire between its own subsystems, yet never actually perform the check or feed the result back to the monitor that raised the alarm, so the same wire is re-flagged forever.</p>
+
+            <p><strong>What changed:</strong> Continues the flock's consumption-auditing chain by giving the re-verification executor a wire resolver that re-probes each flagged connection and folds the fresh observation back into the ledger that flagged it, closing the verify-to-re-observe loop.</p>
+
+            <p><strong>Did it work:</strong> yes — the new feedback test's four scenarios passed: a drifting wire re-checked as carrying cleared itself (its fast reading rose from 0.0156 to 0.5078 and it left the drift list), a still-dead wire stayed owed with zero evidence credited, an unreachable wire abstained without recording any observation, and the executor now routes wire looks to the resolver instead of silently abstaining. The ledger suite (6/6), the pool, executor, and wire-bridge regression suites all still pass.</p>
+
+            <p><strong>Sheep says:</strong> A scheduled look is just a to-do — tonight the flock actually takes the look, and the ledger finally gets the news back.</p>
+        </div>
+    </div>
+<!-- === DAY-2026-10-13-END === -->
+
+
+
 <!-- === DAY-2026-10-12-START === -->
 
     <!-- sub-entry for 2026-10-12 -->
