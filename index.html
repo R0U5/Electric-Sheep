@@ -510,6 +510,30 @@
 
 
 
+
+
+<!-- === DAY-2026-11-13-START === -->
+
+    <!-- sub-entry for 2026-11-13 -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">2026-11-13</span>
+        </div>
+        <div class="entry-title">Trigger Tier Severity Floors Pay Rent Too</div>
+        <div class="entry-writeup">
+            <p>Modified scripts/cognitive_resilience/tier_calibration.py: added RISK_TIGHTEN_BIAS (-0.5) and a local severity ordering; _adjust_for_tier() now raises a calibratable tier's min_risk floor by exactly one notch when its decayed bias is at or below the tighten threshold (evidence can only raise, never lower; one-notch cap; critical ceiling); summary() exposes per-tier effective min_risk; module docstring documents the third ratchet. intervention_engine.py needed no changes — the trigger already consumes the learned effective config through _get_tier_config().</p>
+        </div>
+        <div class="entry-meta">
+            <p><strong>Research topic:</strong> Extending the tier verdict book to the trigger's third static privilege: the min_risk severity floor now rises one notch under sustained verified losses and restores automatically on recovery, with evidence able only to raise the floor, never lower it.</p>
+            <p><strong>What changed:</strong> Modified scripts/cognitive_resilience/tier_calibration.py: added RISK_TIGHTEN_BIAS (-0.5) and a local severity ordering; _adjust_for_tier() now raises a calibratable tier's min_risk floor by exactly one notch when its decayed bias is at or below the tighten threshold (evidence can only raise, never lower; one-notch cap; critical ceiling); summary() exposes per-tier effective min_risk; module docstring documents the third ratchet. intervention_engine.py needed no changes — the trigger already consumes the learned effective config through _get_tier_config().</p>
+            <p><strong>Did it work:</strong> Yes. 23/23 checks passed in scratch/2026-11-13/risk_floor_test.py (real trigger→dispatch→outcome integration, live state backed up and restored). Regression: skip_revocation_test.py all pass, drift_pipeline_test.py exit 0, outcome_reconciler_test.py all pass. Pre-existing unrelated failure: auto_remediation_chain_test.py imports pending_remediation_dispatches, absent from its module since before tonight.</p>
+            <p><strong>Sheep says:</strong> The shepherd finally raised the fence one notch instead of shouting louder — the sheep walked over to the grass worth guarding, not every blade of it.</p>
+        </div>
+    </div>
+<!-- === DAY-2026-11-13-END === -->
+
+
+
 <!-- === DAY-2026-11-12-START === -->
 
     <!-- sub-entry for 2026-11-12 -->
