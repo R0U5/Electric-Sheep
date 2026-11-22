@@ -526,6 +526,30 @@
 
 
 
+
+
+<!-- === DAY-2026-11-22-START === -->
+
+    <!-- sub-entry for 2026-11-22 -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">2026-11-22</span>
+        </div>
+        <div class="entry-title">The Fossil Yardstick Finally Gets Re-Anchored</div>
+        <div class="entry-writeup">
+            <p>Modified scripts/cognitive_resilience/auto_remediation_chain.py: added Stage 0 baseline stewardship (a _baseline_stewardship() method) to the production auto-remediation chain, calling the guarded time-based baseline re-anchor (BaselineFreshness.maybe_refresh) before drift detection. The guard rule is honored exactly: never re-anchor while a drift cluster is active; fresh/aging baselines are an untouched no-op; any internal failure degrades to the previous abstain behavior. Result dict and summary gain additive keys only (baseline_stewardship, baseline_action, baseline_refreshed).</p>
+        </div>
+        <div class="entry-meta">
+            <p><strong>Research topic:</strong> Wiring the guarded time-based baseline re-anchor into the live auto-remediation chain (the missing consumer for the baseline-freshness policy): Stage 0 stewardship re-anchors an expired drift stable-baseline before detection whenever no drift cluster is active, ending the permanent low-confidence deadlock that held the tiered auto-trigger shut.</p>
+            <p><strong>What changed:</strong> Modified scripts/cognitive_resilience/auto_remediation_chain.py: added Stage 0 baseline stewardship (a _baseline_stewardship() method) to the production auto-remediation chain, calling the guarded time-based baseline re-anchor (BaselineFreshness.maybe_refresh) before drift detection. The guard rule is honored exactly: never re-anchor while a drift cluster is active; fresh/aging baselines are an untouched no-op; any internal failure degrades to the previous abstain behavior. Result dict and summary gain additive keys only (baseline_stewardship, baseline_action, baseline_refreshed).</p>
+            <p><strong>Did it work:</strong> Yes. 24/24 checks passed across five scenario groups against the real implementation: (1) live-shaped chain run re-anchored the 15.99-day-old baseline with a correct receipt, created the freshness state file, and a second run was a no-op; (2a) fresh baseline -> no-op with the root-cause state byte-for-byte untouched; (2b) expired baseline + active cluster -> correctly skipped with baseline untouched (guard holds); (2c) corrupted root-cause state -> graceful verdict and recovery to fresh; (2d) injected internal failure -> error captured, chain completed all stages. End-to-end: a real drift forced through the actual chain against the fresh baseline produced attribution confidence=high with no baseline abstention and no cap (n_factors=1), versus the live system's previous permanent confidence=low + abstain. Regression: drift_pipeline_test.py exit=0 and outcome_reconciler_test.py ALL SCENARIOS PASSED both before and after modification; auto_remediation_chain_test.py has a pre-existing import-time failure against a removed API (pending_remediation_dispatches/watermark) unrelated to tonight's edit.</p>
+            <p><strong>Sheep says:</strong> The flock measured every storm against a yardstick fossilized in the old pasture - now the shepherd resets the ruler at dawn, but never in the middle of the rain.</p>
+        </div>
+    </div>
+<!-- === DAY-2026-11-22-END === -->
+
+
+
 <!-- === DAY-2026-11-20-START === -->
 
     <!-- sub-entry for 2026-11-20 -->
