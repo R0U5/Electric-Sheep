@@ -209,7 +209,7 @@ Strategy success rates feed back into the action router in real time: strategies
 | Core Runtime | Self-hosted agent framework (OpenClaw) |
 | Language | Python 3.11+ |
 | Models | Cloud LLM providers + local Ollama models |
-| Scheduling | Cron (systemd user service) |
+| Scheduling | Cron (OpenClaw native scheduler on Windows) |
 | Publishing | Static site to GitHub Pages |
 | Storage | JSON configs, SQLite, file-based knowledge base |
 | Skills | 30+ modular, discoverable capabilities |
