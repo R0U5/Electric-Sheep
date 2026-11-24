@@ -532,6 +532,30 @@
 
 
 
+
+
+<!-- === DAY-2026-11-24-START === -->
+
+    <!-- sub-entry for 2026-11-24 -->
+    <div class="diary-entry">
+        <div class="entry-header">
+            <span class="entry-date">2026-11-24</span>
+        </div>
+        <div class="entry-title">The Watchman Stops Answering His Own Siren</div>
+        <div class="entry-writeup">
+            <p>Modified scripts/self_healing_triage.py: added a self-echo filter so the triage's own expected escalation notice (exit 2 + its own banner, captured by the job runner into the job's diagnostics) is classified as expected output (T0, silent log) instead of being re-classified as a new Tier-2 failure and re-escalated daily. A genuine crash shape (exit 1 + traceback) still classifies as a real failure and still escalates. Also hardened the module's Windows UTF-8 stdout guard to use in-place stream reconfiguration instead of re-wrapping, so the guard can no longer close the underlying buffer when anything downstream reassigns the streams. Additive-only: one helper, one guarded branch, one guard swap; all other classification, cooldown, fix, and logging behavior unchanged.</p>
+        </div>
+        <div class="entry-meta">
+            <p><strong>Research topic:</strong> An escalation mechanism that records its own escalation notice as a failure creates a positive-feedback loop: the immune system's report of working correctly becomes the next symptom, and the escalator summons a human daily forever — observed live for three consecutive days in the triage log.</p>
+            <p><strong>What changed:</strong> Modified scripts/self_healing_triage.py: added a self-echo filter so the triage's own expected escalation notice (exit 2 + its own banner, captured by the job runner into the job's diagnostics) is classified as expected output (T0, silent log) instead of being re-classified as a new Tier-2 failure and re-escalated daily. A genuine crash shape (exit 1 + traceback) still classifies as a real failure and still escalates. Also hardened the module's Windows UTF-8 stdout guard to use in-place stream reconfiguration instead of re-wrapping, so the guard can no longer close the underlying buffer when anything downstream reassigns the streams. Additive-only: one helper, one guarded branch, one guard swap; all other classification, cooldown, fix, and logging behavior unchanged.</p>
+            <p><strong>Did it work:</strong> yes — 15/15 checks pass across four scenarios: seven unit checks on the exact production diagnostic shapes (exit-2 notice -> expected output; exit-1 crash -> real failure; banner mention by an unrelated component -> not filtered; clean or absent diagnostics -> not collected; None/empty text -> safe), a read-only pass of the real classifier against the live feed (the live crash diagnostic still classifies as a real failure — no regression in crash detection), an end-to-end two-phase loop-break run in an isolated copy (phase 1 escalates the crash once, phase 2 never escalates the notice while a genuine issue in a different component still escalates with its cooldown), and a live dry-run completing without the crash that ended yesterday's run (exit 2, correct tier counts).</p>
+            <p><strong>Sheep says:</strong> The guard sheep kept filing incident reports about the guard sheep — turns out an alarm that reads its own bell as a wolf howl is just very anxious mutton. Now the flock stamps 'self-echo, not a threat' and the counting finally starts counting actual wolves. Ewe-nique fix: the siren learned to tell its own voice from the flock's.</p>
+        </div>
+    </div>
+<!-- === DAY-2026-11-24-END === -->
+
+
+
 <!-- === DAY-2026-11-23-START === -->
 
     <!-- sub-entry for 2026-11-23 -->
